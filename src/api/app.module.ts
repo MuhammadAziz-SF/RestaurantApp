@@ -18,9 +18,11 @@ import { LocationsModule } from './locations/locations.module';
 import { IngredientsModule } from './ingredients/ingredients.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { Categories } from 'src/core/entity/categories.entity';
+import { menu_items } from 'src/core/entity/menu_items.entity';
 
 @Module({
-  imports: [TablesModule, ReservationModule, UsersModule, ShiftsModule, DeliveriesModule, ReviewsModule, NotificationsModule, OrderItemsModule, MenuItemsModule, OrdersModule, MenuIngredientsModule, CategoriesModule, InvoicesModule, PaymentsModule, InventoryModule, LocationsModule, IngredientsModule,
+  imports: [TablesModule, ReservationModule, UsersModule, ShiftsModule, DeliveriesModule, ReviewsModule, NotificationsModule, OrderItemsModule, MenuItemsModule, OrdersModule, MenuIngredientsModule, CategoriesModule, InvoicesModule, PaymentsModule, InventoryModule, LocationsModule, IngredientsModule,Categories,menu_items,
 
     ConfigModule.forRoot({
       envFilePath: '.env',
@@ -34,8 +36,9 @@ import { ConfigModule } from '@nestjs/config';
       username: process.env.PG_USER,
       password: String(process.env.PG_PASS),
       database: process.env.PG_DB,
-      entities: [__dirname + '/../core/entities/*.entity.{ts,js}'],
+      entities: [__dirname + '/**/*.entity.{ts,js}'],
       synchronize: true,
+      autoLoadEntities: true,
     }),
     TablesModule,
     ReservationModule,

@@ -12,6 +12,7 @@ export class Table {
     @Column({ type: 'int' })
     capacity: number;
 
+        
     @OneToMany(() => Reservation, reservation => reservation.table)
     reservations: Reservation[];
 }
