@@ -11,6 +11,7 @@ import { ReservationStatus } from '../../common/enum/base.enum';
 import { UserEntity } from './user.entity';
 import { Table } from './table.entity';
 
+
 @Entity('reservations')
 export class Reservation {
     @PrimaryGeneratedColumn('uuid')
@@ -49,4 +50,8 @@ export class Reservation {
 
     @UpdateDateColumn()
     updated_at: Date;
+
+
+
+
 }
