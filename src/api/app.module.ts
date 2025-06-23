@@ -16,10 +16,63 @@ import { PaymentsModule } from './payments/payments.module';
 import { InventoryModule } from './inventory/inventory.module';
 import { LocationsModule } from './locations/locations.module';
 import { IngredientsModule } from './ingredients/ingredients.module';
-
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [TablesModule, ReservationModule, UsersModule, ShiftsModule, DeliveriesModule, ReviewsModule, NotificationsModule, OrderItemsModule, MenuItemsModule, OrdersModule, MenuIngredientsModule, CategoriesModule, InvoicesModule, PaymentsModule, InventoryModule, LocationsModule, IngredientsModule],
+  imports: [
+    TablesModule,
+    ReservationModule,
+    UsersModule,
+    ShiftsModule,
+    DeliveriesModule,
+    ReviewsModule,
+    NotificationsModule,
+    OrderItemsModule,
+    MenuItemsModule,
+    OrdersModule,
+    MenuIngredientsModule,
+    CategoriesModule,
+    InvoicesModule,
+    PaymentsModule,
+    InventoryModule,
+    LocationsModule,
+    IngredientsModule,
+
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
+    }),
+
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.PG_HOST,
+      port: Number(process.env.PG_PORT),
+      username: process.env.PG_USER,
+      password: String(process.env.PG_PASS),
+      database: process.env.PG_DB,
+      entities: [__dirname + '/../core/entities/*.entity.{ts,js}'],
+      synchronize: true,
+      autoLoadEntities: true
+    }),
+    TablesModule,
+    ReservationModule,
+    UsersModule,
+    ShiftsModule,
+    DeliveriesModule,
+    ReviewsModule,
+    NotificationsModule,
+    OrderItemsModule,
+    MenuItemsModule,
+    OrdersModule,
+    MenuIngredientsModule,
+    CategoriesModule,
+    InvoicesModule,
+    PaymentsModule,
+    InventoryModule,
+    LocationsModule,
+    IngredientsModule,
+  ],
   controllers: [],
   providers: [],
 })
