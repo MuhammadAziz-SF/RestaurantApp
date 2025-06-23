@@ -1,9 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order } from 'src/core/entity/order.entity';
+import { errorCatch } from 'src/infrastructure/lib/exeption/error-catch';
+import { successRes } from 'src/infrastructure/lib/exeption/success-response';
 
 @Injectable()
 export class OrdersService {
@@ -12,24 +18,26 @@ export class OrdersService {
     private readonly orderRepository: Repository<Order>,
   ) {}
 
-  async create(createOrderDto: CreateOrderDto): Promise<Order> {
+  async create(createOrderDto: CreateOrderDto) {
     try {
       const order = this.orderRepository.create(createOrderDto);
-      return await this.orderRepository.save(order);
+      await this.orderRepository.save(order);
+      return successRes(order, 201);
     } catch (error) {
-      throw new Error(`Buyurtma yaratishda xatolik: ${error.message}`);
+      return errorCatch(error);
     }
   }
 
   async findAll() {
     try {
-      return await this.orderRepository.find({ relations: ['items'] });
+      const orders = await this.orderRepository.find({ relations: ['items'] });
+      return successRes(orders);
     } catch (error) {
-      throw new Error(`Buyurtmalarni olishda xatolik: ${error.message}`);
+      return errorCatch(error);
     }
   }
 
-  async findOne(id: string): Promise<Order> {
+  async findOne(id: string) {
     try {
       const order = await this.orderRepository.findOne({
         where: { id },
@@ -38,35 +46,37 @@ export class OrdersService {
       if (!order) {
         throw new NotFoundException(`ID si ${id} bo'lgan buyurtma topilmadi`);
       }
-      return order;
+      return successRes(order)
     } catch (error) {
-      throw new Error(`Buyurtma olishda xatolik: ${error.message}`);
+      return errorCatch(error);
     }
   }
 
-  async update(id: string, updateOrderDto: UpdateOrderDto): Promise<Order> {
+  async update(id: string, updateOrderDto: UpdateOrderDto) {
     try {
       const order = await this.orderRepository.findOne({
-        where: {id}
+        where: { id },
       });
       if (!order) {
         throw new NotFoundException(`ID si ${id} bo'lgan buyurtma topilmadi`);
       }
-      return await this.orderRepository.save(order);
+      const updatedOrder = await this.orderRepository.findOne({where: {id}})
+      return successRes(updatedOrder);
     } catch (error) {
-      throw new Error(`Buyurtma yangilashda xatolik: ${error.message}`);
+      return errorCatch(error);
     }
   }
 
-  async remove(id: string): Promise<void> {
+  async remove(id: string) {
     try {
       const order = await this.orderRepository.findOne({ where: { id } });
       if (!order) {
         throw new NotFoundException(`ID si ${id} bo'lgan buyurtma topilmadi`);
       }
       await this.orderRepository.remove(order);
+      return successRes();
     } catch (error) {
-      throw new Error(`Buyurtma o'chirishda xatolik: ${error.message}`);
+      return errorCatch(error);
     }
   }
 }
