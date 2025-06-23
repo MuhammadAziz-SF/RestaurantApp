@@ -20,11 +20,28 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [TablesModule, ReservationModule, UsersModule, ShiftsModule, DeliveriesModule, ReviewsModule, NotificationsModule, OrderItemsModule, MenuItemsModule, OrdersModule, MenuIngredientsModule, CategoriesModule, InvoicesModule, PaymentsModule, InventoryModule, LocationsModule, IngredientsModule,
+  imports: [
+    TablesModule,
+    ReservationModule,
+    UsersModule,
+    ShiftsModule,
+    DeliveriesModule,
+    ReviewsModule,
+    NotificationsModule,
+    OrderItemsModule,
+    MenuItemsModule,
+    OrdersModule,
+    MenuIngredientsModule,
+    CategoriesModule,
+    InvoicesModule,
+    PaymentsModule,
+    InventoryModule,
+    LocationsModule,
+    IngredientsModule,
 
     ConfigModule.forRoot({
       envFilePath: '.env',
-      isGlobal: true
+      isGlobal: true,
     }),
 
     TypeOrmModule.forRoot({
@@ -36,6 +53,7 @@ import { ConfigModule } from '@nestjs/config';
       database: process.env.PG_DB,
       entities: [__dirname + '/../core/entities/*.entity.{ts,js}'],
       synchronize: true,
+      autoLoadEntities: true
     }),
     TablesModule,
     ReservationModule,
@@ -58,4 +76,4 @@ import { ConfigModule } from '@nestjs/config';
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}
