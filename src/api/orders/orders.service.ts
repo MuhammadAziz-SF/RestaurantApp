@@ -46,7 +46,7 @@ export class OrdersService {
       if (!order) {
         throw new NotFoundException(`ID si ${id} bo'lgan buyurtma topilmadi`);
       }
-      return successRes(order)
+      return successRes(order);
     } catch (error) {
       return errorCatch(error);
     }
@@ -60,7 +60,9 @@ export class OrdersService {
       if (!order) {
         throw new NotFoundException(`ID si ${id} bo'lgan buyurtma topilmadi`);
       }
-      const updatedOrder = await this.orderRepository.findOne({where: {id}})
+      const updatedOrder = await this.orderRepository.findOne({
+        where: { id },
+      });
       return successRes(updatedOrder);
     } catch (error) {
       return errorCatch(error);

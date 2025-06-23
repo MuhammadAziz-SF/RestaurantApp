@@ -1,16 +1,20 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Table } from '../../core/entity/table.entity';
 import { CreateTableDto } from './dto/create-table.dto';
-import { UpdateTableDto } from './dto/update-table.dto'
+import { UpdateTableDto } from './dto/update-table.dto';
 
 @Injectable()
 export class TablesService {
   constructor(
     @InjectRepository(Table)
     private tableRepository: Repository<Table>,
-  ) { }
+  ) {}
 
   async create(createTableDto: CreateTableDto): Promise<Table> {
     try {
@@ -61,7 +65,9 @@ export class TablesService {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      throw new BadRequestException('Failed to delete table. This table use in Reservations.');
+      throw new BadRequestException(
+        'Failed to delete table. This table use in Reservations.',
+      );
     }
   }
 }

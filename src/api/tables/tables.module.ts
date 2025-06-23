@@ -10,4 +10,4 @@ import { Table } from '../../core/entity/table.entity';
   providers: [TablesService],
   exports: [TablesService],
 })
-export class TablesModule { }
+export class TablesModule {}

@@ -1,17 +1,30 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Reservation } from "./reservation.entity";
+import {
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Reservation } from './reservation.entity';
 
 @Entity()
 export class Table {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({ type: 'int', unique: true })
-    table_number: number;
+  @Column({ type: 'int', unique: true })
+  table_number: number;
 
-    @Column({ type: 'int' })
-    capacity: number;
+  @Column({ type: 'int' })
+  capacity: number;
 
-    @OneToMany(() => Reservation, reservation => reservation.table)
-    reservations: Reservation[];
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @OneToMany(() => Reservation, (reservation) => reservation.table)
+  reservations: Reservation[];
 }

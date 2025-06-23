@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ReservationsService } from './reservation.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
-import { UpdateReservationDto } from './dto/update-reservation.dto'
+import { UpdateReservationDto } from './dto/update-reservation.dto';
 import {
   ApiTags,
   ApiOperation,
@@ -20,14 +20,18 @@ import {
 } from '@nestjs/swagger';
 import { Reservation } from '../../core/entity/reservation.entity';
 
-@ApiTags('Reservations') // <-- Название секции в Swagger
+@ApiTags('Reservations')
 @Controller('reservations')
 export class ReservationsController {
-  constructor(private readonly reservationsService: ReservationsService) { }
+  constructor(private readonly reservationsService: ReservationsService) {}
 
   @Post()
   @ApiOperation({ summary: 'Create reservation' })
-  @ApiResponse({ status: 201, description: 'Success create', type: Reservation })
+  @ApiResponse({
+    status: 201,
+    description: 'Success create',
+    type: Reservation,
+  })
   @ApiBadRequestResponse({ description: 'Invalid values' })
   async create(@Body() createReservationDto: CreateReservationDto) {
     return this.reservationsService.create(createReservationDto);
@@ -35,7 +39,11 @@ export class ReservationsController {
 
   @Get()
   @ApiOperation({ summary: 'Get all reservations' })
-  @ApiResponse({ status: 200, description: 'All reservations', type: [Reservation] })
+  @ApiResponse({
+    status: 200,
+    description: 'All reservations',
+    type: [Reservation],
+  })
   async findAll() {
     return this.reservationsService.findAll();
   }
@@ -52,7 +60,11 @@ export class ReservationsController {
   @Patch(':id')
   @ApiOperation({ summary: 'Update reservation' })
   @ApiParam({ name: 'id', type: 'string', description: 'ID reservation' })
-  @ApiResponse({ status: 200, description: 'Success update', type: Reservation })
+  @ApiResponse({
+    status: 200,
+    description: 'Success update',
+    type: Reservation,
+  })
   @ApiBadRequestResponse({ description: 'Error in update' })
   async update(
     @Param('id') id: string,
