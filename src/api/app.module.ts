@@ -53,7 +53,7 @@ import { ConfigModule } from '@nestjs/config';
       database: process.env.PG_DB,
       entities: [__dirname + '/../core/entities/*.entity.{ts,js}'],
       synchronize: true,
-      autoLoadEntities: true
+      autoLoadEntities: true,
     }),
     TablesModule,
     ReservationModule,

@@ -1,7 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { TablesService } from '../tables/tables.service';
 import { CreateTableDto } from './dto/create-table.dto';
-import { UpdateTableDto } from './dto/update-table.dto'
+import { UpdateTableDto } from './dto/update-table.dto';
 import {
   ApiTags,
   ApiOperation,
@@ -12,11 +20,10 @@ import {
 } from '@nestjs/swagger';
 import { Table } from '../../core/entity/table.entity';
 
-
 @ApiTags('Tables')
 @Controller('tables')
 export class TablesController {
-  constructor(private readonly tablesService: TablesService) { }
+  constructor(private readonly tablesService: TablesService) {}
 
   @Post()
   @ApiOperation({ summary: 'Create table' })
@@ -39,7 +46,7 @@ export class TablesController {
   @ApiResponse({ status: 200, description: 'Founded', type: Table })
   @ApiNotFoundResponse({ description: 'table not found' })
   findOne(@Param('id') id: string) {
-    return this.tablesService.findOne(+id);
+    return this.tablesService.findOne(id);
   }
 
   @Patch(':id')
@@ -48,7 +55,7 @@ export class TablesController {
   @ApiResponse({ status: 200, description: 'Success update', type: Table })
   @ApiBadRequestResponse({ description: 'Error in update' })
   update(@Param('id') id: string, @Body() updateTableDto: UpdateTableDto) {
-    return this.tablesService.update(+id, updateTableDto);
+    return this.tablesService.update(id, updateTableDto);
   }
 
   @Delete(':id')
@@ -57,6 +64,6 @@ export class TablesController {
   @ApiResponse({ status: 200, description: 'Success delete' })
   @ApiNotFoundResponse({ description: 'table not found' })
   remove(@Param('id') id: string) {
-    return this.tablesService.remove(+id);
+    return this.tablesService.remove(id);
   }
 }

@@ -3,6 +3,6 @@ import { CreateOrderItemDto } from './create-order-item.dto';
 import { IsNotEmpty, IsUUID } from 'class-validator';
 
 export class UpdateOrderItemDto extends PartialType(CreateOrderItemDto) {
-  quantity?: number; 
+  quantity?: number;
   price?: number;
 }

@@ -1,9 +1,15 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Table } from '../../core/entity/table.entity';
 import { CreateTableDto } from './dto/create-table.dto';
-import { UpdateTableDto } from './dto/update-table.dto'
+import { UpdateTableDto } from './dto/update-table.dto';
 
 @Injectable()
 export class TablesService {
@@ -15,6 +21,14 @@ export class TablesService {
   async create(createTableDto: CreateTableDto): Promise<Table> {
     try {
       const table = this.tableRepository.create(createTableDto);
+
+      const existingTable = await this.tableRepository.findOne({
+        where: { table_number: createTableDto.table_number },
+      });
+      if (existingTable) {
+        throw new ConflictException(`Table with this number already exists`);
+      }
+
       return await this.tableRepository.save(table);
     } catch (error) {
       throw new Error('Failed to create table');
@@ -29,7 +43,7 @@ export class TablesService {
     }
   }
 
-  async findOne(id: number): Promise<Table> {
+  async findOne(id: string): Promise<Table> {
     try {
       const table = await this.tableRepository.findOne({ where: { id } });
       if (!table) {
@@ -37,31 +51,34 @@ export class TablesService {
       }
       return table;
     } catch (error) {
-      if (error instanceof NotFoundException) throw error;
-      throw new Error(`Failed to fetch table with ID ${id}`);
+      throw new Error(error, error.message);
     }
   }
 
-  async update(id: number, updateTableDto: UpdateTableDto): Promise<Table> {
+  async update(id: string, updateTableDto: UpdateTableDto): Promise<Table> {
     try {
-      const table = await this.findOne(id);
+      const table = await this.tableRepository.findOneBy({ id });
+
+      if (!table) {
+        throw new NotFoundException(`Table with ID ${id} not found`);
+      }
+
       Object.assign(table, updateTableDto);
       return await this.tableRepository.save(table);
     } catch (error) {
-      if (error instanceof NotFoundException) throw error;
-      throw new Error(`Failed to update table with ID ${id}`);
+      throw new InternalServerErrorException(`Failed to update table with ID ${id}`);
     }
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     try {
       const table = await this.findOne(id);
       await this.tableRepository.remove(table);
+      
     } catch (error) {
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-      throw new BadRequestException('Failed to delete table. This table use in Reservations.');
+      throw new BadRequestException(
+        'Failed to delete table. This table use in Reservations.',
+      );
     }
   }
 }
