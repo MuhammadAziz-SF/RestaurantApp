@@ -17,14 +17,15 @@ export class OrdersService {
     @InjectRepository(Order)
     private readonly orderRepository: Repository<Order>,
   ) {}
+  
 
   async create(createOrderDto: CreateOrderDto) {
     try {
       const order = this.orderRepository.create(createOrderDto);
-      await this.orderRepository.save(order);
-      return successRes(order, 201);
+      const savedOrder = await this.orderRepository.save(order);
+      return successRes(savedOrder,  201);
     } catch (error) {
-      return errorCatch(error);
+      return errorCatch(error)
     }
   }
 
@@ -46,28 +47,40 @@ export class OrdersService {
       if (!order) {
         throw new NotFoundException(`ID si ${id} bo'lgan buyurtma topilmadi`);
       }
-      return successRes(order)
+      return successRes(order);
     } catch (error) {
       return errorCatch(error);
     }
   }
 
-  async update(id: string, updateOrderDto: UpdateOrderDto) {
+  async update(
+    id: string,
+    updateOrderDto: UpdateOrderDto,
+  ) {
     try {
-      const order = await this.orderRepository.findOne({
-        where: { id },
-      });
+      const order = await this.orderRepository.findOne({ where: { id } });
       if (!order) {
         throw new NotFoundException(`ID si ${id} bo'lgan buyurtma topilmadi`);
       }
-      const updatedOrder = await this.orderRepository.findOne({where: {id}})
-      return successRes(updatedOrder);
+      const updatedOrder = await this.orderRepository.preload({
+        id, // Faqat ushbu id ishlatiladi
+        ...Object.fromEntries(
+          Object.entries(updateOrderDto).filter(([key]) => key !== 'id'),
+        ), // id dan tashqari barcha maydonlarni olamiz
+      });
+      if (!updatedOrder) {
+        throw new InternalServerErrorException(
+          'Failed to preload order for update',
+        );
+      }
+      const savedOrder = await this.orderRepository.save(updatedOrder);
+      return successRes(savedOrder);
     } catch (error) {
       return errorCatch(error);
     }
   }
 
-  async remove(id: string) {
+  async remove(id: string){
     try {
       const order = await this.orderRepository.findOne({ where: { id } });
       if (!order) {
