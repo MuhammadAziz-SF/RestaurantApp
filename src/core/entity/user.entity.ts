@@ -1,9 +1,8 @@
 
 import { Review } from "src/api/reviews/entities/review.entity";
-import { Shift } from "src/api/shifts/entities/shift.entity";
-import { Entity, OneToMany, PrimaryGeneratedColumn, Column } from "typeorm";
+import { ShiftEntity } from "src/core/entity/shifts.entity";
+import { Entity, OneToMany, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne } from "typeorm";
 import { Reservation } from "./reservation.entity";
-import { deliveries } from "./deliveries.entity";
 import { orders } from "./orders.entity";
 
 @Entity({ name: 'users' })
@@ -15,7 +14,21 @@ export class UserEntity {
     @Column({type:'varchar'})
     fullName: string;
 
-    @
+    @Column({type: 'varchar'})
+    email: string
+
+    @Column({type: 'varchar'})
+    password: string
+
+    @Column({type: 'enum'})
+    role: string
+
+    @CreateDateColumn()
+    createdAt: Date
+
+    @UpdateDateColumn()
+    updatedAt: Date
+
 
     // @OneToMany(() => Reservation, r => r.user)
     // reservations: Reservation[];
@@ -26,8 +39,8 @@ export class UserEntity {
     // @OneToMany(() => deliveries, delivery => delivery.deliveryPerson)
     // deliveries: deliveries[];
 
-    // @OneToMany(() => Shift, shift => shift.user)
-    // shifts: Shift[];
+    @OneToOne(() => ShiftEntity, shift => shift.user)
+    shift: ShiftEntity;
 
     // @OneToMany(() => Review, review => review.user)
     // reviews: Review[];
