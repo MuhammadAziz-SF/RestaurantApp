@@ -9,9 +9,9 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Categories } from './categories.entity';
-import { MenuIngredient } from 'src/api/menu-ingredients/entities/menu-ingredient.entity';
-import { OrderItem } from 'src/api/order-items/entities/order-item.entity';
-import { Review } from 'src/api/reviews/entities/review.entity';
+import { menuIngredient } from './menu_ingredients.entity';
+import { OrderItem } from './order-item.entity';
+import { reviews } from './reviews.entity';
 
 @Entity('menu_items')
 export class menu_items {
@@ -42,8 +42,8 @@ export class menu_items {
   // @OneToMany(() => OrderItem, (orderItem) => orderItem.menuItem)
   // orderItems: OrderItem[];
 
-  // @OneToMany(() => Review, (review) => review.menuItem)
-  reviews: Review[];
+  @OneToMany(() => reviews, (review) => review.menu_item)
+  reviews: reviews[];
 
   @CreateDateColumn()
   created_at: Date;

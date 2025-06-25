@@ -1,9 +1,11 @@
 
-import { Review } from "src/api/reviews/entities/review.entity";
-import { ShiftEntity } from "src/core/entity/shifts.entity";
+import { reviews } from "./reviews.entity";
+import { ShiftEntity } from "./shifts.entity";
 import { Entity, OneToMany, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne } from "typeorm";
 import { Reservation } from "./reservation.entity";
 import { orders } from "./orders.entity";
+import { deliveries } from "./deliveries.entity";
+import { NotificationEntity } from "./notifications.entity";
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -18,7 +20,7 @@ export class UserEntity {
     email: string
 
     @Column({type: 'varchar'})
-    password: string
+    password: string    
 
     @Column({type: 'enum'})
     role: string
@@ -30,31 +32,21 @@ export class UserEntity {
     updatedAt: Date
 
 
-    // @OneToMany(() => Reservation, r => r.user)
-    // reservations: Reservation[];
+    @OneToMany(() => Reservation, r => r.user)
+    reservations: Reservation[];
 
-    // @OneToMany(() => orders, order => order.manager)
-    // managed_orders: orders[];
+    @OneToMany(() => orders, order => order.manager)
+    managed_orders: orders[];
 
-    // @OneToMany(() => deliveries, delivery => delivery.deliveryPerson)
-    // deliveries: deliveries[];
+    @OneToMany(() => deliveries, delivery => delivery.user_id)
+    deliveries: deliveries[];
 
     @OneToOne(() => ShiftEntity, shift => shift.user)
     shift: ShiftEntity;
 
-    // @OneToMany(() => Review, review => review.user)
-    // reviews: Review[];
+    @OneToMany(() => reviews, review => review.user)
+    reviews: reviews[];
 
-// @OneToMany(() => Review, r => r.user)
-// reviews: Review[];
-
-// @OneToMany(() => Shift, s => s.user)
-// shifts: Shift[];
-
-// @OneToMany(() => Notification, n => n.user)
-// notifications: Notification[];
-
-// @OneToMany(() => Delivery, d => d.delivery_person)
-// deliveries: Delivery[];
-
+    @OneToMany(() => NotificationEntity, notification => notification.user)
+    notifications: NotificationEntity[];
 }

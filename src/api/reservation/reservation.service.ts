@@ -79,7 +79,7 @@ export class ReservationsService {
       }
 
       if (dto.user_id !== undefined) {
-        reservation.user = { id: dto.user_id };
+        reservation.user.id = dto.user_id;
       }
 
       // Обновляем простые поля
