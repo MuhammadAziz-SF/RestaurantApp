@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { menu_items } from './menu_items.entity';
-import { Ingredient } from 'src/api/ingredients/entities/ingredient.entity';
+import { ingredients } from './ingredients.entity';
 
 @Entity('menu_ingredients')
 export class menuIngredient {
@@ -22,11 +22,11 @@ export class menuIngredient {
   @Column({ type: 'decimal' })
   quantity: number;
 
-  //     @ManyToOne(() => menu_items, mi => mi.menu_ingredients, { onDelete: 'CASCADE' })
-  // @JoinColumn({ name: 'menu_item_id' })
-  // menu_item: menu_items;
+  @ManyToOne(() => menu_items, mi => mi.id, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'menu_item_id' , referencedColumnName: 'id'})
+  menu_item: menu_items;
 
-  // @ManyToOne(() => Ingredient, i => i.menu_ingredients, { onDelete: 'CASCADE' })
-  // @JoinColumn({ name: 'ingredient_id' })
-  // ingredient: Ingredient;
+  @ManyToOne(() => ingredients, i => i.id, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'ingredient_id' , referencedColumnName: 'id'})
+  ingredient: ingredients;
 }

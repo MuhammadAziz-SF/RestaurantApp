@@ -1,4 +1,4 @@
-import { Payment } from 'src/api/payments/entities/payment.entity';
+import { payments } from './payments.entity';
 import {
   Column,
   Entity,
@@ -13,12 +13,12 @@ export class invoices {
   id: string;
 
   @Column({ type: 'int' })
-  payment_id: number;
+  payment_id: string;
 
   @Column({ type: 'date' })
   issued_at: Date;
 
-  // @OneToOne(() => Payment, p => p.invoice, { onDelete: 'CASCADE' })
-  // @JoinColumn({ name: 'payment_id' })
-  // payment: Payment;
+  @OneToOne(() => payments, p => p.invoice, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'payment_id' })
+  payment: payments;
 }

@@ -1,4 +1,4 @@
-import { Ingredient } from 'src/api/ingredients/entities/ingredient.entity';
+import { ingredients } from './ingredients.entity';
 import {
   Column,
   Entity,
@@ -6,6 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { location } from './location.entity';
 
 @Entity('inventory')
 export class inventory {
@@ -21,11 +22,11 @@ export class inventory {
   @Column({ type: 'decimal' })
   quantity: number;
 
-  //     @ManyToOne(() => Ingredient, i => i.inventory, { onDelete: 'CASCADE' })
-  // @JoinColumn({ name: 'ingredient_id' })
-  // ingredient: Ingredient;
+  @ManyToOne(() => ingredients, i => i.inventory, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'ingredient_id' , referencedColumnName: 'id'})
+  ingredient: ingredients;
 
-  // @ManyToOne(() => Location, l => l.inventory, { onDelete: 'CASCADE' })
-  // @JoinColumn({ name: 'location_id' })
-  // location: Location;
+  @ManyToOne(() => location, l => l.inventory, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'location_id' , referencedColumnName: 'id'})
+  location: location;
 }

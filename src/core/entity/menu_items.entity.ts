@@ -36,11 +36,11 @@ export class menu_items {
   @JoinColumn({ name: 'category_id' })
   category: Categories;
 
-  // @OneToMany(() => MenuIngredient, (menuIngredient) => menuIngredient.menuItem)
-  // ingredients: MenuIngredient[];
+  @OneToMany(() => menuIngredient, (menuIngredient) => menuIngredient.menu_item)
+  ingredients: menuIngredient[];
 
-  // @OneToMany(() => OrderItem, (orderItem) => orderItem.menuItem)
-  // orderItems: OrderItem[];
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.menu_item)
+  orderItems: OrderItem[];
 
   @OneToMany(() => reviews, (review) => review.menu_item)
   reviews: reviews[];
