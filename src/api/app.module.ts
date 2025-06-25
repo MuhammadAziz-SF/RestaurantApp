@@ -5,19 +5,21 @@ import { UsersModule } from './users/users.module';
 import { ShiftsModule } from './shifts/shifts.module';
 import { DeliveriesModule } from './deliveries/deliveries.module';
 import { ReviewsModule } from './reviews/reviews.module';
-import { NotificationsModule } from './notifications/notifications.module';
+// import { NotificationsModule } from './notifications/notifications.module';
 import { OrderItemsModule } from './order-items/order-items.module';
 import { MenuItemsModule } from './menu-items/menu-items.module';
 import { OrdersModule } from './orders/orders.module';
-import { MenuIngredientsModule } from './menu-ingredients/menu-ingredients.module';
+// import { MenuIngredientsModule } from './menu-ingredients/menu-ingredients.module';
 import { CategoriesModule } from './categories/categories.module';
-import { InvoicesModule } from './invoices/invoices.module';
-import { PaymentsModule } from './payments/payments.module';
-import { InventoryModule } from './inventory/inventory.module';
-import { LocationsModule } from './locations/locations.module';
-import { IngredientsModule } from './ingredients/ingredients.module';
+  import { InvoicesModule } from './invoices/invoices.module';
+  import { PaymentsModule } from './payments/payments.module';
+  import { InventoryModule } from './inventory/inventory.module';
+  import { LocationsModule } from './locations/locations.module';
+  import { IngredientsModule } from './ingredients/ingredients.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';  
+import { Categories } from 'src/core/entity/categories.entity';
+import { menu_items } from 'src/core/entity/menu_items.entity';
 
 @Module({
   imports: [
@@ -27,11 +29,11 @@ import { ConfigModule } from '@nestjs/config';
     ShiftsModule,
     DeliveriesModule,
     ReviewsModule,
-    NotificationsModule,
+    // NotificationsModule,
     OrderItemsModule,
     MenuItemsModule,
     OrdersModule,
-    MenuIngredientsModule,
+    // MenuIngredientsModule,
     CategoriesModule,
     InvoicesModule,
     PaymentsModule,
@@ -51,7 +53,7 @@ import { ConfigModule } from '@nestjs/config';
       username: process.env.PG_USER,
       password: String(process.env.PG_PASS),
       database: process.env.PG_DB,
-      entities: [__dirname + '/../core/entities/*.entity.{ts,js}'],
+      entities: [__dirname + '/**/*.entity.{ts,js}'],
       synchronize: true,
       autoLoadEntities: true,
     }),
@@ -61,17 +63,19 @@ import { ConfigModule } from '@nestjs/config';
     ShiftsModule,
     DeliveriesModule,
     ReviewsModule,
-    NotificationsModule,
+    // NotificationsModule,
     OrderItemsModule,
     MenuItemsModule,
     OrdersModule,
-    MenuIngredientsModule,
+    // MenuIngredientsModule,
     CategoriesModule,
-    InvoicesModule,
-    PaymentsModule,
-    InventoryModule,
-    LocationsModule,
-    IngredientsModule,
+    // InvoicesModule,
+    // PaymentsModule,
+    // InventoryModule,
+    // LocationsModule,
+    // IngredientsModule,
+    Categories,
+    menu_items,
   ],
   controllers: [],
   providers: [],

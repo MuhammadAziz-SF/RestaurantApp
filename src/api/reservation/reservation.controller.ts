@@ -20,7 +20,7 @@ import {
 } from '@nestjs/swagger';
 import { Reservation } from '../../core/entity/reservation.entity';
 
-@ApiTags('Reservations') // <-- Название секции в Swagger
+@ApiTags('Reservations')
 @Controller('reservations')
 export class ReservationsController {
   constructor(private readonly reservationsService: ReservationsService) {}

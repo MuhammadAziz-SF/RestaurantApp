@@ -15,10 +15,19 @@ export class UpdateReservationDto extends PartialType(CreateReservationDto) {
   @IsOptional()
   @IsUUID()
   user_id?: string;
+<<<<<<< HEAD
   @ApiPropertyOptional({ example: 1 })
   @IsOptional()
   @IsInt()
   table?: number;
+=======
+
+  @ApiPropertyOptional({ example: 1 })
+  @IsOptional()
+  @IsInt()
+  table_id?: number;
+
+>>>>>>> edb29a4077427e1cb638b7868e73bee884ea89d7
   @ApiPropertyOptional({
     enum: ReservationStatus,
     example: ReservationStatus.CONFIRMED,
@@ -26,6 +35,10 @@ export class UpdateReservationDto extends PartialType(CreateReservationDto) {
   @IsOptional()
   @IsEnum(ReservationStatus)
   status?: ReservationStatus;
+<<<<<<< HEAD
+=======
+
+>>>>>>> edb29a4077427e1cb638b7868e73bee884ea89d7
   @IsDateString()
   @IsOptional()
   reservation_time?: string;
