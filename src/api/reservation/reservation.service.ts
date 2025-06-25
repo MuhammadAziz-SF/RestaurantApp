@@ -19,7 +19,7 @@ export class ReservationsService {
     @InjectRepository(Reservation)
     private readonly reservationRepository: Repository<Reservation>,
     private readonly tablesService: TablesService,
-<<<<<<< HEAD
+
   ) { }
 
   async create(dto: CreateReservationDto): Promise<Reservation> {
@@ -29,29 +29,16 @@ export class ReservationsService {
         table: { id: dto.table_id },
         status: dto.status ?? ReservationStatus.PENDING,
         reservation_time: dto.reservation_time,
-=======
-  ) {}
-  async create(
-    createReservationDto: CreateReservationDto,
-  ): Promise<Reservation> {
-    try {
-      const reservation = this.reservationRepository.create({
-        user: { id: createReservationDto.user_id },
-        table: { id: createReservationDto.table_id },
-        status: createReservationDto.status ?? ReservationStatus.PENDING,
-        reservation_time: createReservationDto.reservation_time,
->>>>>>> edb29a4077427e1cb638b7868e73bee884ea89d7
+
       });
 
       return await this.reservationRepository.save(reservation);
     } catch (error) {
-<<<<<<< HEAD
-      throw new BadRequestException('Failed to create reservation');
-=======
+
       throw new BadRequestException(
         `Failed to create reservation: ${error.message}`,
       );
->>>>>>> edb29a4077427e1cb638b7868e73bee884ea89d7
+
     }
   }
 
@@ -71,10 +58,9 @@ export class ReservationsService {
     try {
       const reservation = await this.reservationRepository.findOne({
         where: { id },
-<<<<<<< HEAD
+
         relations: ['table', 'user'],
-=======
->>>>>>> edb29a4077427e1cb638b7868e73bee884ea89d7
+
       });
 
       if (!reservation) {
@@ -88,37 +74,23 @@ export class ReservationsService {
     }
   }
 
-  async update(id: string, dto: UpdateReservationDto): Promise<Reservation> {
-
+  async update(id: string, updateReservationDto: UpdateReservationDto): Promise<Reservation> {
     try {
       const reservation = await this.findOne(id);
 
-      if (dto.user_id !== undefined) {
-        reservation.user = { id: dto.user_id };
+      if (updateReservationDto.user_id !== undefined) {
+        reservation.user.id = updateReservationDto.user_id;
       }
 
-      
-      if (dto.status !== undefined) {
-        if (!Object.values(ReservationStatus).includes(dto.status)) {
+      if (updateReservationDto.status !== undefined) {
+        if (!Object.values(ReservationStatus).includes(updateReservationDto.status)) {
           throw new BadRequestException('Invalid status value');
         }
-        reservation.status = dto.status;
+        reservation.status = updateReservationDto.status;
       }
-<<<<<<< HEAD
 
-=======
-      if (
-        dto.status &&
-        !Object.values(ReservationStatus).includes(dto.status)
-      ) {
-        throw new BadRequestException(
-          'Invalid status. Use a correct enum value.',
-        );
-      }
->>>>>>> edb29a4077427e1cb638b7868e73bee884ea89d7
-
-      if (dto.reservation_time !== undefined) {
-        reservation.reservation_time = new Date(dto.reservation_time);
+      if (updateReservationDto.reservation_time !== undefined) {
+        reservation.reservation_time = new Date(updateReservationDto.reservation_time);
       }
 
       return await this.reservationRepository.save(reservation);
@@ -129,23 +101,16 @@ export class ReservationsService {
       ) {
         throw error;
       }
-<<<<<<< HEAD
+
       throw new InternalServerErrorException('Failed to update reservation');
     }
   }
 
   async remove(id: string): Promise<{ message: string }> {
-=======
-      throw new BadRequestException(
-        'Failed to update reservation. correct COLUMN',
-      );
+    if (!id) {
+      throw new BadRequestException('Reservation ID is required');
     }
-  }
 
-  async remove(id: string): Promise<void> {
-    if (!id) throw new BadRequestException('Reservation ID is required');
-
->>>>>>> edb29a4077427e1cb638b7868e73bee884ea89d7
     try {
       const reservation = await this.findOne(id);
       await this.reservationRepository.remove(reservation);

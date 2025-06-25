@@ -13,11 +13,7 @@ export class CreateReservationDto {
   user_id: string;
 
   @IsNotEmpty()
-<<<<<<< HEAD
   table_id: string;
-=======
-  table_id: number;
->>>>>>> edb29a4077427e1cb638b7868e73bee884ea89d7
 
   @IsEnum(ReservationStatus)
   @IsOptional()

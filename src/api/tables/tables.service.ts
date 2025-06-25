@@ -1,12 +1,8 @@
 import {
   BadRequestException,
-<<<<<<< HEAD
   ConflictException,
-  Injectable,
   InternalServerErrorException,
-=======
   Injectable,
->>>>>>> edb29a4077427e1cb638b7868e73bee884ea89d7
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -80,12 +76,9 @@ export class TablesService {
       await this.tableRepository.remove(table);
       
     } catch (error) {
-<<<<<<< HEAD
-=======
       if (error instanceof NotFoundException) {
         throw error;
       }
->>>>>>> edb29a4077427e1cb638b7868e73bee884ea89d7
       throw new BadRequestException(
         'Failed to delete table. This table use in Reservations.',
       );
