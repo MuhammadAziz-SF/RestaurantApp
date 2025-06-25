@@ -18,7 +18,7 @@ export class UpdateReservationDto extends PartialType(CreateReservationDto) {
   @ApiPropertyOptional({ example: 1 })
   @IsOptional()
   @IsInt()
-  table_id?: number;
+  table?: number;
   @ApiPropertyOptional({
     enum: ReservationStatus,
     example: ReservationStatus.CONFIRMED,

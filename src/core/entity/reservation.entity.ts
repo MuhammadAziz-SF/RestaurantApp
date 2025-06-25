@@ -19,21 +19,20 @@ export class Reservation {
   @Column({ type: 'uuid' })
   user_id: string;
 
-  @ManyToOne(() => UserEntity, { nullable: false })
+  @ManyToOne(() => UserEntity)
   @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 
   @Column({ type: 'int' })
   table_id: number;
 
-  @ManyToOne(() => Table, (table) => table.reservations, { nullable: false })
+  @ManyToOne(() => Table, (table) => table.reservations)
   @JoinColumn({ name: 'id' })
   table: Table;
 
   @Column({
     type: 'timestamp',
     nullable: false,
-    default: () => 'CURRENT_TIMESTAMP',
   })
   reservation_time: Date;
 
