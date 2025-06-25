@@ -1,21 +1,28 @@
-import { IsString,IsNumber,IsBoolean,IsOptional,Min,IsInt } from "class-validator";
+import {
+  IsString,
+  IsNumber,
+  IsBoolean,
+  IsOptional,
+  Min,
+  IsInt,
+} from 'class-validator';
 
 export class CreateMenuItemDto {
-    @IsString()
-    name:string;
+  @IsString()
+  name: string;
 
-    @IsOptional()
-    @IsString()
-    description?:string;
+  @IsOptional()
+  @IsString()
+  description?: string;
 
-    @IsNumber()
-    @Min(0)
-    price:number;
+  @IsNumber()
+  @Min(0)
+  price: number;
 
-    @IsOptional()
-    @IsBoolean()
-    is_available?:boolean;
+  @IsOptional()
+  @IsBoolean()
+  is_available?: boolean;
 
-    @IsInt()
-    category_id?:number;
+  @IsInt()
+  category_id?: number;
 }

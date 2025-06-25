@@ -1,39 +1,37 @@
-import { Order } from "src/api/orders/entities/order.entity";
-import { User } from "src/api/users/entities/user.entity";
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { orders } from "./orders.entity";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { orders } from './orders.entity';
+import { UserEntity } from './user.entity';
 
 @Entity('deliveries')
-export class deliveries{
-    @PrimaryGeneratedColumn()
-    id:number
+export class DeliveryEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column({type:'int'})
-    order_id:number
+  @ManyToOne(() => orders, (order) => order.delivery)
+  @JoinColumn({ name: 'order_id' })
+  order: orders;
 
-    @Column({type:'int'})
-    delivery_person_id:number;
+  @ManyToOne(() => UserEntity, (user) => user.delivery)
+  @JoinColumn({ name: 'delivery_person_id' })
+  user_id: UserEntity;
 
-    @Column({type:'varchar'})
-    address:string
+  @Column({ type: 'varchar' })
+  address: string;
 
-    @Column({type:'varchar'})
-    status:string
+  @Column({ type: 'varchar' })
+  status: string;
 
-    @Column({type:'date'})
-    estimated_time:Date;
+  @Column({ type: 'date' })
+  estimated_time: Date;
 
-    @Column({type:'date'})
-    delivered_at:Date
-
-
-
-    // @OneToOne(() => Order, orders => orders.deliveries, { onDelete: 'CASCADE' })
-    // @JoinColumn({ name: 'order_id' })
-    // order: Order;
-
-    // @ManyToOne(() => User, u => u.deliveries, { onDelete: 'SET NULL' })
-    // @JoinColumn({ name: 'delivery_person_id' })
-    // delivery_person: User;
-
+  @Column({ type: 'date' })
+  delivered_at: Date;
 }

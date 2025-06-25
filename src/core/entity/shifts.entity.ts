@@ -1,22 +1,28 @@
-import { User } from "src/api/users/entities/user.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { UserEntity } from './user.entity';
 
 @Entity('shifts')
-export class shifts{
-    @PrimaryGeneratedColumn()
-    id:number
+export class ShiftEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column({type:'int'})
-    user_id:number
+  @Column({ type: 'varchar' })
+  user_id: string;
 
-    @Column({type:'date'})
-    start_time:Date
+  @Column({ type: 'date' })
+  start_time: Date;
 
-    @Column({type:'date'})
-    end_time:Date
+  @Column({ type: 'date' })
+  end_time: Date;
 
-    // @ManyToOne(() => User, u => u.shifts, { onDelete: 'CASCADE' })
-    // @JoinColumn({ name: 'user_id' })
-    // user: User;
-
+  @OneToOne(() => UserEntity, (user) => user.shift)
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  user: UserEntity;
 }

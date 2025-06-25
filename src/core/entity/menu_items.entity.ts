@@ -1,42 +1,53 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Categories } from "./categories.entity";
-import { MenuIngredient } from "src/api/menu-ingredients/entities/menu-ingredient.entity";
-import { OrderItem } from "src/api/order-items/entities/order-item.entity";
-import { Review } from "src/api/reviews/entities/review.entity";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Categories } from './categories.entity';
+import { MenuIngredient } from 'src/api/menu-ingredients/entities/menu-ingredient.entity';
+import { OrderItem } from 'src/api/order-items/entities/order-item.entity';
+import { Review } from 'src/api/reviews/entities/review.entity';
 
 @Entity('menu_items')
-export class menu_items{
-    @PrimaryGeneratedColumn()
-    id:number
+export class menu_items {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({type:'varchar', unique:true})
-    name:string;
-    
-    @Column({type:'varchar'})
-    description:string;
+  @Column({ type: 'varchar', unique: true })
+  name: string;
 
-    @Column({type:'int'})
-    price:number
+  @Column({ type: 'varchar' })
+  description: string;
 
-    @Column({default:true})
-    is_available:boolean
+  @Column({ type: 'int' })
+  price: number;
 
-    @ManyToOne(() => Categories, (category) => category.menuItems,{onDelete:'SET NULL'})
-    @JoinColumn({name:'category_id'})
-    category: Categories;
+  @Column({ default: true })
+  is_available: boolean;
 
-    // @OneToMany(() => MenuIngredient, (menuIngredient) => menuIngredient.menuItem)
-    // ingredients: MenuIngredient[];
+  @ManyToOne(() => Categories, (category) => category.menuItems, {
+    onDelete: 'SET NULL',
+  })
+  @JoinColumn({ name: 'category_id' })
+  category: Categories;
 
-    // @OneToMany(() => OrderItem, (orderItem) => orderItem.menuItem)
-    // orderItems: OrderItem[];
+  // @OneToMany(() => MenuIngredient, (menuIngredient) => menuIngredient.menuItem)
+  // ingredients: MenuIngredient[];
 
-    // @OneToMany(() => Review, (review) => review.menuItem)
-    reviews: Review[];
+  // @OneToMany(() => OrderItem, (orderItem) => orderItem.menuItem)
+  // orderItems: OrderItem[];
 
-    @CreateDateColumn()
-    created_at: Date;
+  // @OneToMany(() => Review, (review) => review.menuItem)
+  reviews: Review[];
 
-    @UpdateDateColumn()
-    updated_at: Date;
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }

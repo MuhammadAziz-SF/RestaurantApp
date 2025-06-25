@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { menu_items } from 'src/core/entity/menu_items.entity';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([menu_items])],
+  imports: [TypeOrmModule.forFeature([menu_items])],
   controllers: [MenuItemsController],
   providers: [MenuItemsService],
 })

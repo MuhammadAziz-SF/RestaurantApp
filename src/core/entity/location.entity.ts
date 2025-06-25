@@ -1,13 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('location')
-export class location{
-    @PrimaryGeneratedColumn()
-    id:number
+export class location {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({type:'varchar'})
-    name:string
+  @Column({ type: 'varchar' })
+  name: string;
 
-    @Column({type:'varchar'})
-    type:string
+  @Column({ type: 'varchar' })
+  type: string;
 }

@@ -1,23 +1,36 @@
-import { Order } from "src/api/orders/entities/order.entity";
+
 import { Review } from "src/api/reviews/entities/review.entity";
 import { Shift } from "src/api/shifts/entities/shift.entity";
-import { Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { Entity, OneToMany, PrimaryGeneratedColumn, Column } from "typeorm";
 import { Reservation } from "./reservation.entity";
-import { Delivery } from "src/api/deliveries/entities/delivery.entity";
+import { deliveries } from "./deliveries.entity";
+import { orders } from "./orders.entity";
 
 @Entity({ name: 'users' })
 export class UserEntity {
 
-    @PrimaryColumn('uuid')
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
+    @Column({type:'varchar'})
+    fullName: string;
 
+    @
 
-// @OneToMany(() => Reservation, r => r.user)
-// reservations: Reservation[];
+    // @OneToMany(() => Reservation, r => r.user)
+    // reservations: Reservation[];
 
-// @OneToMany(() => Order, o => o.manager)
-// managed_orders: Order[];
+    // @OneToMany(() => orders, order => order.manager)
+    // managed_orders: orders[];
+
+    // @OneToMany(() => deliveries, delivery => delivery.deliveryPerson)
+    // deliveries: deliveries[];
+
+    // @OneToMany(() => Shift, shift => shift.user)
+    // shifts: Shift[];
+
+    // @OneToMany(() => Review, review => review.user)
+    // reviews: Review[];
 
 // @OneToMany(() => Review, r => r.user)
 // reviews: Review[];
