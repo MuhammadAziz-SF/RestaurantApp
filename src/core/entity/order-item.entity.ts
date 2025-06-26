@@ -5,8 +5,8 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Order } from './order.entity';
 import { menu_items } from './menu_items.entity';
+import { orders } from './orders.entity';
 
 @Entity('order_items')
 export class OrderItem {
@@ -16,9 +16,9 @@ export class OrderItem {
   @Column({ type: 'uuid' })
   order_id: string;
 
-  @ManyToOne(() => Order, (order) => order.items, { nullable: false })
+  @ManyToOne(() => orders, (order) => order.items, { nullable: false })
   @JoinColumn({ name: 'order_id' })
-  order: Order;
+  order: orders;
 
   @Column({ type: 'uuid' })
   menu_item_id: string;

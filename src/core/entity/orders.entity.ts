@@ -13,6 +13,7 @@ import { OrderItem } from './order-item.entity';
 import { payments } from './payments.entity';
 import { UserEntity } from './user.entity';
 import { Reservation } from './reservation.entity';
+import { OrderStatus } from 'src/common';
 
 @Entity('orders')
 export class orders {
@@ -23,8 +24,12 @@ export class orders {
   @JoinColumn({ name: 'reservation_id' })
   reservation: Reservation;
 
-  @Column({ type: 'varchar' })
-  status: string;
+  @Column({
+    type: 'enum',
+    enum: OrderStatus,
+    default: OrderStatus.PENDING,
+  })
+  status: OrderStatus;
 
   @CreateDateColumn()
   created_at: Date;

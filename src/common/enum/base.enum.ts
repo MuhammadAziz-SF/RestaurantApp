@@ -5,7 +5,7 @@ export enum UserRole {
   WAITER = 'waiter',
   CHEF = 'chef',
   CUSTOMER = 'customer',
-  DELIVERY = 'delivery',
+  DELIVER = 'deliver'
 }
 
 export enum ReservationStatus {
@@ -19,7 +19,5 @@ export enum OrderStatus {
   PREPARING = 'preparing',
   READY = 'ready',
   SERVED = 'served',
-  CANCELLED = 'cancelled',
-  DELIVERING = 'delivering',
-  DELIVERED = 'delivered',
+  CANCELLED = 'cancelled'
 }

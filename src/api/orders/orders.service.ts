@@ -7,15 +7,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-import { Order } from 'src/core/entity/order.entity';
+import { orders } from 'src/core/entity/orders.entity';
 import { errorCatch } from 'src/infrastructure/lib/exeption/error-catch';
 import { successRes } from 'src/infrastructure/lib/exeption/success-response';
 
 @Injectable()
 export class OrdersService {
   constructor(
-    @InjectRepository(Order)
-    private readonly orderRepository: Repository<Order>,
+    @InjectRepository(orders)
+    private readonly orderRepository: Repository<orders>,
   ) {}
 
   async create(createOrderDto: CreateOrderDto) {
