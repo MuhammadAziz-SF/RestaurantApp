@@ -11,7 +11,7 @@ import { orders } from './orders.entity';
 import { UserEntity } from './user.entity';
 
 @Entity('deliveries')
-export class DeliveryEntity {
+export class deliveries {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -19,7 +19,7 @@ export class DeliveryEntity {
   @JoinColumn({ name: 'order_id' })
   order: orders;
 
-  @ManyToOne(() => UserEntity, (user) => user.delivery)
+  @ManyToOne(() => UserEntity, (user) => user.deliveries)
   @JoinColumn({ name: 'delivery_person_id' })
   user_id: UserEntity;
 

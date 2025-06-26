@@ -1,4 +1,4 @@
-import { UserEntity} from './user.entity';
+import { UserEntity } from './user.entity';
 import {
   Column,
   CreateDateColumn,
@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 
 @Entity('notifications')
-export class notifications {
+export class NotificationEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -25,8 +25,7 @@ export class notifications {
   @CreateDateColumn()
   created_at: Date;
 
-  // @ManyToOne(() => User, u => u.notifications, { onDelete: 'CASCADE' })
-
-  // @JoinColumn({ name: 'user_id' })
-  // user: User;
+  @ManyToOne(() => UserEntity, u => u.notifications)
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  user: UserEntity;
 }

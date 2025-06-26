@@ -11,9 +11,6 @@ import { Categories } from 'src/core/entity/categories.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-<<<<<<< HEAD
-export class CategoriesService {}
-=======
 export class CategoriesService {
   constructor(
     @InjectRepository(Categories)
@@ -93,4 +90,3 @@ export class CategoriesService {
     }
   }
 }
->>>>>>> edb29a4077427e1cb638b7868e73bee884ea89d7

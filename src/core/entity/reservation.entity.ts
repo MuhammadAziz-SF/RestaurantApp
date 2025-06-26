@@ -21,21 +21,24 @@ export class Reservation {
   @Column({ type: 'uuid' })
   user_id: string;
 
-
-  @ManyToOne(() => UserEntity)
-  @JoinColumn({ name: 'user_id' })
+  @ManyToOne(() => UserEntity, (user) => user.reservations, { nullable: false })
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: UserEntity;
 
-  @Column({ type: 'int' })
-  table_id: number;
+  @OneToMany(() => orders, (order) => order.reservation)
+  orders: orders[];
 
-  @ManyToOne(() => Table, (table) => table.reservations)
-  @JoinColumn({ name: 'id' })
+  @Column({ type: 'uuid' })
+  table_id: string;
+
+  @ManyToOne(() => Table, (table) => table.reservations, { nullable: false })
+  @JoinColumn({ name: 'table_id', referencedColumnName: 'id' })
   table: Table;
 
   @Column({
     type: 'timestamp',
     nullable: false,
+    default: () => 'CURRENT_TIMESTAMP',
   })
   reservation_time: Date;
 
@@ -48,9 +51,6 @@ export class Reservation {
 
   @CreateDateColumn()
   created_at: Date;
-
-  @OneToMany(() => orders, (order) => order.reservation)
-  orders: orders[];
 
   @UpdateDateColumn()
   updated_at: Date;

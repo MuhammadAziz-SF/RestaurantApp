@@ -8,17 +8,18 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { menu_items } from './menu_items.entity';
+import { UserEntity } from './user.entity';
 
 @Entity('reviews')
 export class reviews {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'uuid' })
   user_id: string;
 
-  @Column({ type: 'varchar' })
-  menu_item_id: string;
+  @Column({ type: 'int' })
+  menu_item_id: number;
 
   @Column({ type: 'int' })
   rating: number;
@@ -32,11 +33,11 @@ export class reviews {
   @UpdateDateColumn()
   updated_at: Date;
 
-  // @ManyToOne(() => User, u => u.reviews, { onDelete: 'SET NULL' })
-  // @JoinColumn({ name: 'user_id' })
-  // user: User;
+  @ManyToOne(() => UserEntity, (u) => u.reviews, { onDelete: 'SET NULL' })
+  @JoinColumn({ name: 'user_id' })
+  user: UserEntity;
 
-  // @ManyToOne(() => menu_items, m => m.reviews, { onDelete: 'CASCADE' })
-  // @JoinColumn({ name: 'menu_item_id' })
-  // menu_item: menu_items;
+  @ManyToOne(() => menu_items, (m) => m.reviews, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'menu_item_id' })
+  menu_item: menu_items;
 }

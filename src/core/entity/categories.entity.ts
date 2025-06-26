@@ -16,7 +16,7 @@ export class Categories {
   @Column({ type: 'varchar', unique: true })
   name: string;
 
-  @OneToMany(() => menu_items, (menuItem) => menuItem.id)
+  @OneToMany(() => menu_items, (menuItem) => menuItem.category)
   menuItems: menu_items[];
 
   @CreateDateColumn()

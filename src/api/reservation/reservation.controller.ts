@@ -23,7 +23,7 @@ import { Reservation } from '../../core/entity/reservation.entity';
 @ApiTags('Reservations')
 @Controller('reservations')
 export class ReservationsController {
-  constructor(private readonly reservationsService: ReservationsService) {}
+  constructor(private readonly reservationsService: ReservationsService) { }
 
   @Post()
   @ApiOperation({ summary: 'Create reservation' })

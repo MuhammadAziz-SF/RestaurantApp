@@ -9,9 +9,9 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Categories } from './categories.entity';
-import { MenuIngredient } from 'src/api/menu-ingredients/entities/menu-ingredient.entity';
+import { menuIngredient } from './menu_ingredients.entity';
 import { OrderItem } from './order-item.entity';
-import { Review } from 'src/api/reviews/entities/review.entity';
+import { reviews } from './reviews.entity';
 
 @Entity('menu_items')
 export class menu_items {
@@ -36,14 +36,14 @@ export class menu_items {
   @JoinColumn({ name: 'category_id' })
   category: Categories;
 
-  // @OneToMany(() => MenuIngredient, (menuIngredient) => menuIngredient.menuItem)
-  // ingredients: MenuIngredient[];
+  @OneToMany(() => menuIngredient, (menuIngredient) => menuIngredient.menu_item)
+  ingredients: menuIngredient[];
 
-  // @OneToMany(() => OrderItem, (orderItem) => orderItem.menuItem)
-  // orderItems: OrderItem[];
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.menu_item_id)
+  orderItems: OrderItem[];
 
-  // @OneToMany(() => Review, (review) => review.menuItem)
-  reviews: Review[];
+  @OneToMany(() => reviews, (review) => review.menu_item)
+  reviews: reviews[];
 
   @CreateDateColumn()
   created_at: Date;

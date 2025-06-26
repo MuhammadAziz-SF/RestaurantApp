@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { orders } from './orders.entity';
+import { invoices } from './invoices.entity';
 
 @Entity('payments')
 export class payments {
@@ -27,4 +28,8 @@ export class payments {
   @OneToOne(() => orders, (order) => order.payment)
   @JoinColumn({ name: 'order_id' })
   order: orders;
+
+  @OneToOne(() => invoices, (invoice) => invoice.payment)
+  @JoinColumn({ name: 'invoice_id' })
+  invoice: invoices;
 }

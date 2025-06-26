@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { inventory } from './inventory.entity';
 
 @Entity('location')
 export class location {
@@ -10,4 +11,7 @@ export class location {
 
   @Column({ type: 'varchar' })
   type: string;
+
+  @OneToMany(() => inventory, i => i.location)
+  inventory: inventory[];
 }

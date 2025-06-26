@@ -1,11 +1,11 @@
 export const successRes = (
-  data: any = {},
+  data: string,
   statusCode: number = 200,
   message: string = 'success',
 ) => {
   return {
+    data,
     statusCode,
     message,
-    data,
   };
 };

@@ -66,7 +66,9 @@ export class TablesService {
       Object.assign(table, updateTableDto);
       return await this.tableRepository.save(table);
     } catch (error) {
-      throw new InternalServerErrorException(`Failed to update table with ID ${id}`);
+      throw new InternalServerErrorException(
+        `Failed to update table with ID ${id}`,
+      );
     }
   }
 
@@ -74,7 +76,6 @@ export class TablesService {
     try {
       const table = await this.findOne(id);
       await this.tableRepository.remove(table);
-      
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw error;

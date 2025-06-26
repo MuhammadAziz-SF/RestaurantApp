@@ -19,8 +19,7 @@ export class ReservationsService {
     @InjectRepository(Reservation)
     private readonly reservationRepository: Repository<Reservation>,
     private readonly tablesService: TablesService,
-
-  ) { }
+  ) {}
 
   async create(dto: CreateReservationDto): Promise<Reservation> {
     try {
@@ -29,16 +28,13 @@ export class ReservationsService {
         table: { id: dto.table_id },
         status: dto.status ?? ReservationStatus.PENDING,
         reservation_time: dto.reservation_time,
-
       });
 
       return await this.reservationRepository.save(reservation);
     } catch (error) {
-
       throw new BadRequestException(
         `Failed to create reservation: ${error.message}`,
       );
-
     }
   }
 
@@ -54,13 +50,11 @@ export class ReservationsService {
   }
 
   async findOne(id: string): Promise<Reservation> {
-
     try {
       const reservation = await this.reservationRepository.findOne({
         where: { id },
 
         relations: ['table', 'user'],
-
       });
 
       if (!reservation) {
@@ -74,7 +68,10 @@ export class ReservationsService {
     }
   }
 
-  async update(id: string, updateReservationDto: UpdateReservationDto): Promise<Reservation> {
+  async update(
+    id: string,
+    updateReservationDto: UpdateReservationDto,
+  ): Promise<Reservation> {
     try {
       const reservation = await this.findOne(id);
 
@@ -83,14 +80,20 @@ export class ReservationsService {
       }
 
       if (updateReservationDto.status !== undefined) {
-        if (!Object.values(ReservationStatus).includes(updateReservationDto.status)) {
+        if (
+          !Object.values(ReservationStatus).includes(
+            updateReservationDto.status,
+          )
+        ) {
           throw new BadRequestException('Invalid status value');
         }
         reservation.status = updateReservationDto.status;
       }
 
       if (updateReservationDto.reservation_time !== undefined) {
-        reservation.reservation_time = new Date(updateReservationDto.reservation_time);
+        reservation.reservation_time = new Date(
+          updateReservationDto.reservation_time,
+        );
       }
 
       return await this.reservationRepository.save(reservation);

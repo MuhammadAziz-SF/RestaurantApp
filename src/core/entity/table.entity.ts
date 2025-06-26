@@ -1,25 +1,23 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Reservation } from './reservation.entity';
-import { Max, Min } from 'class-validator';
 
 @Entity()
 export class Table {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ type: 'int', unique: true })
   table_number: number;
 
   @Column({ type: 'int' })
-  @Min(1)
-  @Max(2)
   capacity: number;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 
   @OneToMany(() => Reservation, (reservation) => reservation.table)
   reservations: Reservation[];
