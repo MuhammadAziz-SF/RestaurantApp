@@ -79,6 +79,7 @@ export class ReservationsService {
         reservation.user.id = updateReservationDto.user_id;
       }
 
+<<<<<<< HEAD
       if (updateReservationDto.status !== undefined) {
         if (
           !Object.values(ReservationStatus).includes(
@@ -88,6 +89,10 @@ export class ReservationsService {
           throw new BadRequestException('Invalid status value');
         }
         reservation.status = updateReservationDto.status;
+=======
+      if (dto.user_id !== undefined) {
+        reservation.user.id = dto.user_id;
+>>>>>>> 117927f332bfee7c05bda7b49da2d7e516041abe
       }
 
       if (updateReservationDto.reservation_time !== undefined) {

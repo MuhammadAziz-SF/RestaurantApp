@@ -17,4 +17,8 @@ export class ingredients {
 
   @OneToMany(() => inventory, inv => inv.ingredient_id)
   inventory: inventory[];
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 117927f332bfee7c05bda7b49da2d7e516041abe

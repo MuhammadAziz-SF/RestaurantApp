@@ -26,6 +26,12 @@ export class NotificationEntity {
   created_at: Date;
 
   @ManyToOne(() => UserEntity, u => u.notifications)
+<<<<<<< HEAD
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: UserEntity;
 }
+=======
+  @JoinColumn({ name: 'user_id' , referencedColumnName: 'id'})
+  user: UserEntity;
+}
+>>>>>>> 117927f332bfee7c05bda7b49da2d7e516041abe

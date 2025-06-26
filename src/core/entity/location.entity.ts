@@ -14,4 +14,8 @@ export class location {
 
   @OneToMany(() => inventory, i => i.location)
   inventory: inventory[];
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 117927f332bfee7c05bda7b49da2d7e516041abe

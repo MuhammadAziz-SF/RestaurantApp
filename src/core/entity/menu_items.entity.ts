@@ -39,7 +39,11 @@ export class menu_items {
   @OneToMany(() => menuIngredient, (menuIngredient) => menuIngredient.menu_item)
   ingredients: menuIngredient[];
 
+<<<<<<< HEAD
   @OneToMany(() => OrderItem, (orderItem) => orderItem.menu_item_id)
+=======
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.menu_item)
+>>>>>>> 117927f332bfee7c05bda7b49da2d7e516041abe
   orderItems: OrderItem[];
 
   @OneToMany(() => reviews, (review) => review.menu_item)

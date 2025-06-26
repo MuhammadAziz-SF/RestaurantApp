@@ -13,7 +13,7 @@ export default class Application {
     const api = 'api/v1';
     app.setGlobalPrefix(api);
     const config_swagger = new DocumentBuilder()
-      .setTitle('Base app')
+      .setTitle('Restaurant App')
       .setVersion('1.0')
       .addBearerAuth({
         type: 'http',

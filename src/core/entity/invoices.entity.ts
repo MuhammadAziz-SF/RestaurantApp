@@ -21,4 +21,8 @@ export class invoices {
   @OneToOne(() => payments, p => p.invoice, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'payment_id' })
   payment: payments;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 117927f332bfee7c05bda7b49da2d7e516041abe

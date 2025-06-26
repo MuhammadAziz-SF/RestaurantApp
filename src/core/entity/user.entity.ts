@@ -43,4 +43,8 @@ export class UserEntity {
 
   @OneToMany(() => NotificationEntity, notification => notification.user)
   notifications: NotificationEntity[];
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 117927f332bfee7c05bda7b49da2d7e516041abe

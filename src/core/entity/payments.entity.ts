@@ -32,4 +32,8 @@ export class payments {
   @OneToOne(() => invoices, (invoice) => invoice.payment)
   @JoinColumn({ name: 'invoice_id' })
   invoice: invoices;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 117927f332bfee7c05bda7b49da2d7e516041abe
