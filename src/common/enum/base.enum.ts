@@ -22,3 +22,11 @@ export enum OrderStatus {
   DELIVERING = 'delivering',
   DELIVERED = 'delivered',
 }
+
+export enum DeliveryStatus {
+  ASSIGNED = "assigned",
+  PICKED_UP = "picked_up",
+  IN_TRANSIT = "in_transit",
+  DELIVERED = "delivered",
+  CANCELLED = "cancelled",
+}

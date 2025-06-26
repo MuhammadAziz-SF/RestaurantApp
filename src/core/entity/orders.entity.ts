@@ -8,7 +8,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { deliveries } from './deliveries.entity';
+import { Deliveries } from './deliveries.entity';
 import { OrderItem } from './order-item.entity';
 import { payments } from './payments.entity';
 import { UserEntity } from './user.entity';
@@ -39,6 +39,6 @@ export class orders {
   @OneToOne(() => payments, (payment) => payment.order)
   payment: payments;
 
-  @OneToOne(() => deliveries, (delivery) => delivery.order)
-  delivery: deliveries;
+  @OneToOne(() => Deliveries, (delivery) => delivery.order)
+  delivery: Deliveries;
 }
