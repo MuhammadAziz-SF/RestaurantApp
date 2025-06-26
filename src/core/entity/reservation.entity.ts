@@ -1,52 +1,57 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    ManyToOne,
-    CreateDateColumn,
-    UpdateDateColumn,
-    JoinColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+  JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { ReservationStatus } from '../../common/enum/base.enum';
 import { UserEntity } from './user.entity';
 import { Table } from './table.entity';
+import { orders } from './orders.entity';
 
 @Entity('reservations')
 export class Reservation {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column({ type: 'uuid' })
-    user_id: string;
+  @Column({ type: 'uuid' })
+  user_id: string;
 
-    @ManyToOne(() => UserEntity, { nullable: false })
-    @JoinColumn({ name: 'user_id' })
-    user: UserEntity;
+  @ManyToOne(() => UserEntity, (user) => user.reservations, { nullable: false })
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  user: UserEntity;
 
-    @Column({ type: 'int' })
-    table_id: number;
+  @OneToMany(() => orders, (order) => order.reservation)
+  orders: orders[];
 
-    @ManyToOne(() => Table, table => table.reservations, { nullable: false })
-    @JoinColumn({ name: 'table_id' })
-    table: Table;
+  @Column({ type: 'uuid' })
+  table_id: string;
 
-    @Column({
-        type: 'timestamp',
-        nullable: false,
-        default: () => 'CURRENT_TIMESTAMP',
-    })
-    reservation_time: Date;
+  @ManyToOne(() => Table, (table) => table.reservations, { nullable: false })
+  @JoinColumn({ name: 'table_id', referencedColumnName: 'id' })
+  table: Table;
 
-    @Column({
-        type: 'enum',
-        enum: ReservationStatus,
-        default: ReservationStatus.PENDING,
-    })
-    status: ReservationStatus;
+  @Column({
+    type: 'timestamp',
+    nullable: false,
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  reservation_time: Date;
 
-    @CreateDateColumn()
-    created_at: Date;
+  @Column({
+    type: 'enum',
+    enum: ReservationStatus,
+    default: ReservationStatus.PENDING,
+  })
+  status: ReservationStatus;
 
-    @UpdateDateColumn()
-    updated_at: Date;
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }

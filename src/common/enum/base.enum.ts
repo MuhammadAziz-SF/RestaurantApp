@@ -1,7 +1,16 @@
+export enum UserRole {
+  ADMIN = 'admin',
+  MANAGER = 'manager',
+  WAITER = 'waiter',
+  CHEF = 'chef',
+  CUSTOMER = 'customer',
+  DELIVERY = 'delivery',
+}
+
 export enum ReservationStatus {
-    PENDING = 'pending',
-    CONFIRMED = 'confirmed',
-    CANCELLED = 'cancelled',
+  PENDING = 'pending',
+  CONFIRMED = 'confirmed',
+  CANCELLED = 'cancelled',
 }
 
 export enum OrderStatus {

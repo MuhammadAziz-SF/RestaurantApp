@@ -1,26 +1,25 @@
 import {
-    IsUUID,
-    IsNotEmpty,
-    IsEnum,
-    IsDateString,
-    IsOptional
+  IsUUID,
+  IsNotEmpty,
+  IsEnum,
+  IsDateString,
+  IsOptional,
 } from 'class-validator';
 import { ReservationStatus } from '../../../common/enum/base.enum';
 
 export class CreateReservationDto {
-    @IsUUID()
-    @IsNotEmpty()
-    user_id: string;
+  @IsUUID()
+  @IsNotEmpty()
+  user_id: string;
 
-    @IsNotEmpty()
-    table_id: number;
+  @IsNotEmpty()
+  table_id: number;
 
-    @IsEnum(ReservationStatus)
-    @IsOptional()
-    status?: ReservationStatus;
+  @IsEnum(ReservationStatus)
+  @IsOptional()
+  status?: ReservationStatus;
 
-    @IsDateString()
-    @IsOptional()
-    reservation_time?: string;
+  @IsDateString()
+  @IsOptional()
+  reservation_time?: string;
 }
-

@@ -7,12 +7,8 @@ import { TablesModule } from '../tables/tables.module';
 import { UsersModule } from '../users/users.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Reservation]),
-    TablesModule,
-    UsersModule,
-  ],
+  imports: [TypeOrmModule.forFeature([Reservation]), TablesModule, UsersModule],
   controllers: [ReservationsController],
   providers: [ReservationsService],
 })
-export class ReservationModule { }
+export class ReservationModule {}

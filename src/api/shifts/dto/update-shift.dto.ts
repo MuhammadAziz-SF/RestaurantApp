@@ -1,4 +1,12 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateShiftDto } from './create-shift.dto';
 
-export class UpdateShiftDto extends PartialType(CreateShiftDto) {}
+import { IsDateString, IsOptional } from 'class-validator';
+
+export class UpdateShiftDto {
+  @IsOptional()
+  @IsDateString()
+  start_time?: string;
+
+  @IsOptional()
+  @IsDateString()
+  end_time?: string;
+}

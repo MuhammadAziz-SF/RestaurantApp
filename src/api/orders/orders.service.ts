@@ -75,6 +75,12 @@ export class OrdersService {
       }
       const savedOrder = await this.orderRepository.save(updatedOrder);
       return successRes(savedOrder);
+
+      const updatedOrde = await this.orderRepository.findOne({
+        where: { id },
+      });
+      return successRes(updatedOrde);
+
     } catch (error) {
       return errorCatch(error);
     }
