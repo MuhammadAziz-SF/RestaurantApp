@@ -20,8 +20,8 @@ export class OrderItem {
   @JoinColumn({ name: 'order_id' })
   order: Order;
 
-  @Column({ type: 'int' })
-  menu_item_id: number;
+  @Column({ type: 'uuid' })
+  menu_item_id: string;
 
   @Column({ type: 'int' })
   quantity: number;

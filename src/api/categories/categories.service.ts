@@ -44,49 +44,49 @@ export class CategoriesService {
     }
   }
 
-  async findOne(id: number) {
-    try {
-      const category = await this.categoryRepo.findOne({
-        where: { id },
-        select: ['id', 'name'],
-      });
-      if (!category) {
-        throw new NotFoundException('Not Found');
-      }
-      return category;
-    } catch (error) {
-      throw new InternalServerErrorException(error);
-    }
-  }
+  // async findOne(id: string) {
+  //   try {
+  //     const category = await this.categoryRepo.findOne({
+  //       where: { id },
+  //       select: ['id', 'name'],
+  //     });
+  //     if (!category) {
+  //       throw new NotFoundException('Not Found');
+  //     }
+  //     return category;
+  //   } catch (error) {
+  //     throw new InternalServerErrorException(error);
+  //   }
+  // }
 
-  async update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    try {
-      const category = await this.categoryRepo.findOne({ where: { id } });
-      if (!category) {
-        throw new NotFoundException('Not Found');
-      }
+  // async update(id: string, updateCategoryDto: UpdateCategoryDto) {
+  //   try {
+  //     const category = await this.categoryRepo.findOne({ where: { id } });
+  //     if (!category) {
+  //       throw new NotFoundException('Not Found');
+  //     }
 
-      await this.categoryRepo.update({ id }, updateCategoryDto);
-      const updatecategory = await this.categoryRepo.findOne({
-        where: { id },
-        select: ['id', 'name'],
-      });
-      return updatecategory;
-    } catch (error) {
-      throw new InternalServerErrorException(error);
-    }
-  }
+  //     await this.categoryRepo.update(id, updateCategoryDto);
+  //     const updatecategory = await this.categoryRepo.findOne({
+  //       where: { id },
+  //       select: ['id', 'name'],
+  //     });
+  //     return updatecategory;
+  //   } catch (error) {
+  //     throw new InternalServerErrorException(error);
+  //   }
+  // }
 
-  async remove(id: number) {
-    try {
-      const category = await this.categoryRepo.findOne({ where: { id } });
-      if (!category) {
-        throw new NotFoundException('Not Found');
-      }
-      await this.categoryRepo.delete({ id });
-      return { message: 'success' };
-    } catch (error) {
-      throw new InternalServerErrorException(error);
-    }
-  }
+  // async remove(id: string) {
+  //   try {
+  //     const category = await this.categoryRepo.findOne();
+  //     if (!category) {
+  //       throw new NotFoundException('Not Found');
+  //     }
+  //     await this.categoryRepo.delete(id);
+  //     return { message: 'success' };
+  //   } catch (error) {
+  //     throw new InternalServerErrorException(error);
+  //   }
+  // }
 }

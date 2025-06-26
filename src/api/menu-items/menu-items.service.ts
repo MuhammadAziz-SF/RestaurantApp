@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { CreateMenuItemDto } from './dto/create-menu-item.dto';
-import { UpdateMenuItemDto } from './dto/update-menu-item.dto';
+// import { UpdateMenuItemDto } from './dto/update-menu-item.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { menu_items } from 'src/core/entity/menu_items.entity';
 import { Repository } from 'typeorm';
@@ -52,22 +52,22 @@ export class MenuItemsService {
     }
   }
 
-  async update(id: number, updateMenuItemDto: UpdateMenuItemDto) {
-    try {
-      const menu_items = await this.menuRepo.findOne({ where: { id } });
-      if (!menu_items) {
-        throw new NotFoundException('Not Found');
-      }
-      await this.menuRepo.update({ id }, updateMenuItemDto);
-      const updateMenuItem = await this.menuRepo.findOne({
-        where: { id },
-        select: ['id', 'name', 'description', 'price', 'is_available'],
-      });
-      return updateMenuItem;
-    } catch (error) {
-      throw new InternalServerErrorException(error);
-    }
-  }
+  // async update(id: number, updateMenuItemDto: UpdateMenuItemDto) {
+  //   try {
+  //     const menu_items = await this.menuRepo.findOne({ where: { id } });
+  //     if (!menu_items) {
+  //       throw new NotFoundException('Not Found');
+  // //     }
+  //     await this.menuRepo.update({ id }, updateMenuItemDto);
+  //     const updateMenuItem = await this.menuRepo.findOne({
+  //       where: { id },
+  //       select: ['id', 'name', 'description', 'price', 'is_available'],
+  //     });
+  //     return updateMenuItem;
+  //   } catch (error) {
+  //     throw new InternalServerErrorException(error);
+  //   }
+  // }
 
   async remove(id: number) {
     try {

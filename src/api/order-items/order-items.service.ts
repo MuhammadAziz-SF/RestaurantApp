@@ -18,15 +18,15 @@ export class OrderItemsService {
     private readonly orderItemRepository: Repository<OrderItem>,
   ) {}
 
-  async create(createOrderItemDto: CreateOrderItemDto) {
-    try {
-      const orderItem = this.orderItemRepository.create(createOrderItemDto);
-      await this.orderItemRepository.save(orderItem);
-      return successRes(orderItem, 201);
-    } catch (error) {
-      return errorCatch(error);
-    }
-  }
+  // async create(createOrderItemDto: CreateOrderItemDto) {
+  //   try {
+  //     const orderItem = this.orderItemRepository.create(createOrderItemDto);
+  //     await this.orderItemRepository.save(orderItem);
+  //     return successRes(orderItem, 201);
+  //   } catch (error) {
+  //     return errorCatch(error);
+  //   }
+  // }
 
   async findAll() {
     try {
@@ -56,25 +56,25 @@ export class OrderItemsService {
     }
   }
 
-  async update(id: string, updateOrderItemDto: UpdateOrderItemDto) {
-    try {
-      const orderItem = await this.orderItemRepository.preload({
-        id,
-        ...updateOrderItemDto,
-      });
-      if (!orderItem) {
-        throw new NotFoundException(
-          `ID si ${id} bo'lgan buyurtma elementi topilmadi`,
-        );
-      }
-      const updatedOrderItem = await this.orderItemRepository.findOne({
-        where: { id },
-      });
-      return successRes(updatedOrderItem);
-    } catch (error) {
-      return errorCatch(error);
-    }
-  }
+  // async update(id: string, updateOrderItemDto: UpdateOrderItemDto) {
+  //   try {
+  //     const orderItem = await this.orderItemRepository.preload({
+  //       id,
+  //       ...updateOrderItemDto,
+  //     });
+  //     if (!orderItem) {
+  //       throw new NotFoundException(
+  //         `ID si ${id} bo'lgan buyurtma elementi topilmadi`,
+  //       );
+  //     }
+  //     const updatedOrderItem = await this.orderItemRepository.findOne({
+  //       where: { id },
+  //     });
+  //     return successRes(updatedOrderItem);
+  //   } catch (error) {
+  //     return errorCatch(error);
+  //   }
+  // }
 
   async remove(id: string) {
     try {

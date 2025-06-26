@@ -40,10 +40,10 @@ export class UsersService {
     return this.usersRepo.save(user);
   }
 
-  async updateRole(id: string, role: UserRole): Promise<UserEntity> {
-    await this.usersRepo.update(id, { role });
-    return this.findOne(id);
-  }
+  // async updateRole(id: string, role: UserRole): Promise<UserEntity> {
+  //   await this.usersRepo.update(id, { role });
+  //   return this.findOne(id);
+  // }
 
   async remove(id: string): Promise<void> {
     const user = await this.findOne(id);

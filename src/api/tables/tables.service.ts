@@ -6,8 +6,8 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Table } from '../../core/entity/table.entity';
-import { CreateTableDto } from './dto/create-table.dto';
-import { UpdateTableDto } from './dto/update-table.dto';
+// import { CreateTableDto } from './dto/create-table.dto';
+// import { UpdateTableDto } from './dto/update-table.dto';
 
 @Injectable()
 export class TablesService {
@@ -16,14 +16,14 @@ export class TablesService {
     private tableRepository: Repository<Table>,
   ) {}
 
-  async create(createTableDto: CreateTableDto): Promise<Table> {
-    try {
-      const table = this.tableRepository.create(createTableDto);
-      return await this.tableRepository.save(table);
-    } catch (error) {
-      throw new Error('Failed to create table');
-    }
-  }
+  // async create(createTableDto: CreateTableDto): Promise<Table> {
+  //   try {
+  //     const table = this.tableRepository.create(createTableDto);
+  //     return await this.tableRepository.save(table);
+  //   } catch (error) {
+  //     throw new Error('Failed to create table');
+  //   }
+  // }
 
   async findAll(): Promise<Table[]> {
     try {
@@ -46,16 +46,16 @@ export class TablesService {
     }
   }
 
-  async update(id: number, updateTableDto: UpdateTableDto): Promise<Table> {
-    try {
-      const table = await this.findOne(id);
-      Object.assign(table, updateTableDto);
-      return await this.tableRepository.save(table);
-    } catch (error) {
-      if (error instanceof NotFoundException) throw error;
-      throw new Error(`Failed to update table with ID ${id}`);
-    }
-  }
+  // async update(id: number, updateTableDto: UpdateTableDto): Promise<Table> {
+  //   try {
+  //     const table = await this.findOne(id);
+  //     Object.assign(table, updateTableDto);
+  //     return await this.tableRepository.save(table);
+  //   } catch (error) {
+  //     if (error instanceof NotFoundException) throw error;
+  //     throw new Error(`Failed to update table with ID ${id}`);
+  //   }
+  // }
 
   async remove(id: number): Promise<void> {
     try {

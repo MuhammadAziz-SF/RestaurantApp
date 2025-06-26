@@ -15,10 +15,10 @@ import { UpdateOrderItemDto } from './dto/update-order-item.dto';
 export class OrderItemsController {
   constructor(private readonly orderItemsService: OrderItemsService) {}
 
-  @Post()
-  create(@Body() createOrderItemDto: CreateOrderItemDto) {
-    return this.orderItemsService.create(createOrderItemDto);
-  }
+  // @Post()
+  // create(@Body() createOrderItemDto: CreateOrderItemDto) {
+  //   return this.orderItemsService.create(createOrderItemDto);
+  // }
 
   @Get()
   findAll() {
@@ -30,13 +30,13 @@ export class OrderItemsController {
     return this.orderItemsService.findOne(id);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateOrderItemDto: UpdateOrderItemDto,
-  ) {
-    return this.orderItemsService.update(id, updateOrderItemDto);
-  }
+  // @Patch(':id')
+  // update(
+  //   @Param('id') id: string,
+  //   @Body() updateOrderItemDto: UpdateOrderItemDto,
+  // ) {
+  //   return this.orderItemsService.update(id, updateOrderItemDto);
+  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

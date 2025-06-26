@@ -20,6 +20,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';  
 import { Categories } from 'src/core/entity/categories.entity';
 import { menu_items } from 'src/core/entity/menu_items.entity';
+import { IngredientsModule } from './ingredients/ingredients.module';
+import { InventoryModule } from './inventory/inventory.module';
+import { InvoicesModule } from './invoices/invoices.module';
+import { LocationsModule } from './locations/locations.module';
+import { MenuIngredientsModule } from './menu-ingredients/menu-ingredients.module';
+import { NotificationsModule } from './notifications/notifications.module';
+import { PaymentsModule } from './payments/payments.module';
+import { ReviewsModule } from './reviews/reviews.module';
 
 @Module({
   imports: [
@@ -76,6 +84,14 @@ import { menu_items } from 'src/core/entity/menu_items.entity';
     // IngredientsModule,
     Categories,
     menu_items,
+    IngredientsModule,
+    InventoryModule,
+    InvoicesModule,
+    LocationsModule,
+    MenuIngredientsModule,
+    NotificationsModule,
+    PaymentsModule,
+    ReviewsModule,
   ],
   controllers: [],
   providers: [],
