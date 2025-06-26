@@ -6,8 +6,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   JoinColumn,
-
-
   OneToMany,
 } from 'typeorm';
 import { ReservationStatus } from '../../common/enum/base.enum';
