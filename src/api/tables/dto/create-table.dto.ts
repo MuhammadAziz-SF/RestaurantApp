@@ -1,4 +1,4 @@
-import { IsEmpty, IsNumber } from 'class-validator';
+import { IsEmpty, IsNumber } from "class-validator";
 
 export class CreateTableDto {
   @IsEmpty()

@@ -3,15 +3,15 @@ import {
   NotFoundException,
   BadRequestException,
   InternalServerErrorException,
-} from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+} from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
-import { Reservation } from '../../core/entity/reservation.entity';
-import { CreateReservationDto } from './dto/create-reservation.dto';
-import { UpdateReservationDto } from './dto/update-reservation.dto';
-import { TablesService } from '../tables/tables.service';
-import { ReservationStatus } from '../../common/enum/base.enum';
+import { Reservation } from "../../core/entity/reservation.entity";
+import { CreateReservationDto } from "./dto/create-reservation.dto";
+import { UpdateReservationDto } from "./dto/update-reservation.dto";
+import { TablesService } from "../tables/tables.service";
+import { ReservationStatus } from "../../common/enum/base.enum";
 
 @Injectable()
 export class ReservationsService {
@@ -21,31 +21,31 @@ export class ReservationsService {
     private readonly tablesService: TablesService,
   ) {}
 
-  async create(dto: CreateReservationDto): Promise<Reservation> {
-    try {
-      const reservation = this.reservationRepository.create({
-        user: { id: dto.user_id },
-        table: { id: dto.table_id },
-        status: dto.status ?? ReservationStatus.PENDING,
-        reservation_time: dto.reservation_time,
-      });
+  // async create(dto: CreateReservationDto): Promise<Reservation> {
+  //   try {
+  //     const reservation = this.reservationRepository.create({
+  //       user: { id: dto.user_id },
+  //       table: { id: dto.table_id },
+  //       status: dto.status ?? ReservationStatus.PENDING,
+  //       reservation_time: dto.reservation_time,
+  //     });
 
-      return await this.reservationRepository.save(reservation);
-    } catch (error) {
-      throw new BadRequestException(
-        `Failed to create reservation: ${error.message}`,
-      );
-    }
-  }
+  //     return await this.reservationRepository.save(reservation);
+  //   } catch (error) {
+  //     throw new BadRequestException(
+  //       `Failed to create reservation: ${error.message}`,
+  //     );
+  //   }
+  // }
 
   async findAll(): Promise<Reservation[]> {
     try {
       return await this.reservationRepository.find({
-        relations: ['table', 'user'],
-        order: { created_at: 'DESC' },
+        relations: ["table", "user"],
+        order: { created_at: "DESC" },
       });
     } catch (error) {
-      throw new InternalServerErrorException('Failed to fetch reservations');
+      throw new InternalServerErrorException("Failed to fetch reservations");
     }
   }
 
@@ -54,7 +54,7 @@ export class ReservationsService {
       const reservation = await this.reservationRepository.findOne({
         where: { id },
 
-        relations: ['table', 'user'],
+        relations: ["table", "user"],
       });
 
       if (!reservation) {
@@ -64,7 +64,7 @@ export class ReservationsService {
       return reservation;
     } catch (error) {
       if (error instanceof NotFoundException) throw error;
-      throw new InternalServerErrorException('Failed to fetch reservation');
+      throw new InternalServerErrorException("Failed to fetch reservation");
     }
   }
 
@@ -79,20 +79,15 @@ export class ReservationsService {
         reservation.user.id = updateReservationDto.user_id;
       }
 
-<<<<<<< HEAD
       if (updateReservationDto.status !== undefined) {
         if (
           !Object.values(ReservationStatus).includes(
             updateReservationDto.status,
           )
         ) {
-          throw new BadRequestException('Invalid status value');
+          throw new BadRequestException("Invalid status value");
         }
         reservation.status = updateReservationDto.status;
-=======
-      if (dto.user_id !== undefined) {
-        reservation.user.id = dto.user_id;
->>>>>>> 117927f332bfee7c05bda7b49da2d7e516041abe
       }
 
       if (updateReservationDto.reservation_time !== undefined) {
@@ -110,20 +105,20 @@ export class ReservationsService {
         throw error;
       }
 
-      throw new InternalServerErrorException('Failed to update reservation');
+      throw new InternalServerErrorException("Failed to update reservation");
     }
   }
 
   async remove(id: string): Promise<{ message: string }> {
     if (!id) {
-      throw new BadRequestException('Reservation ID is required');
+      throw new BadRequestException("Reservation ID is required");
     }
 
     try {
       const reservation = await this.findOne(id);
       await this.reservationRepository.remove(reservation);
 
-      return { message: 'Reservation successfully deleted' };
+      return { message: "Reservation successfully deleted" };
     } catch (error) {
       if (
         error instanceof NotFoundException ||
@@ -131,7 +126,7 @@ export class ReservationsService {
       ) {
         throw error;
       }
-      throw new InternalServerErrorException('Failed to delete reservation');
+      throw new InternalServerErrorException("Failed to delete reservation");
     }
   }
 }

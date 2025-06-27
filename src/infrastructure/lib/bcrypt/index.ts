@@ -1,5 +1,5 @@
-import { BadRequestException } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import { BadRequestException } from "@nestjs/common";
+import * as bcrypt from "bcrypt";
 
 const salt_or_rounds = 10;
 

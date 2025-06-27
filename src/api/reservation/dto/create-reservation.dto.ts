@@ -4,8 +4,8 @@ import {
   IsEnum,
   IsDateString,
   IsOptional,
-} from 'class-validator';
-import { ReservationStatus } from '../../../common/enum/base.enum';
+} from "class-validator";
+import { ReservationStatus } from "../../../common/enum/base.enum";
 
 export class CreateReservationDto {
   @IsUUID()

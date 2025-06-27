@@ -1,11 +1,9 @@
-
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { UserEntity } from '../../core/entity/user.entity';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { UserRole } from '../../common/enum/base.enum';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { UserEntity } from "../../core/entity/user.entity";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
 
 @Injectable()
 export class UsersService {
@@ -15,13 +13,13 @@ export class UsersService {
   ) {}
 
   findAll(): Promise<UserEntity[]> {
-    return this.usersRepo.find({ relations: ['shifts'] });
+    return this.usersRepo.find({ relations: ["shifts"] });
   }
 
   async findOne(id: string): Promise<UserEntity> {
     const user = await this.usersRepo.findOne({
       where: { id },
-      relations: ['shifts'],
+      relations: ["shifts"],
     });
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);

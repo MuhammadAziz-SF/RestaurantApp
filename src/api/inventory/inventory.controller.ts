@@ -6,12 +6,12 @@ import {
   Patch,
   Param,
   Delete,
-} from '@nestjs/common';
-import { InventoryService } from './inventory.service';
-import { CreateInventoryDto } from './dto/create-inventory.dto';
-import { UpdateInventoryDto } from './dto/update-inventory.dto';
+} from "@nestjs/common";
+import { InventoryService } from "./inventory.service";
+import { CreateInventoryDto } from "./dto/create-inventory.dto";
+import { UpdateInventoryDto } from "./dto/update-inventory.dto";
 
-@Controller('inventory')
+@Controller("inventory")
 export class InventoryController {
   constructor(private readonly inventoryService: InventoryService) {}
 
@@ -25,21 +25,21 @@ export class InventoryController {
     return this.inventoryService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Get(":id")
+  findOne(@Param("id") id: string) {
     return this.inventoryService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch(":id")
   update(
-    @Param('id') id: string,
+    @Param("id") id: string,
     @Body() updateInventoryDto: UpdateInventoryDto,
   ) {
     return this.inventoryService.update(+id, updateInventoryDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Delete(":id")
+  remove(@Param("id") id: string) {
     return this.inventoryService.remove(+id);
   }
 }

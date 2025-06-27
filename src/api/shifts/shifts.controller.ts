@@ -1,4 +1,3 @@
-
 import {
   Controller,
   Get,
@@ -9,15 +8,15 @@ import {
   Body,
   ParseIntPipe,
   UseGuards,
-} from '@nestjs/common';
-import { ShiftService } from './shift.service';
-import { CreateShiftDto } from './dto/create-shift.dto';
-import { UpdateShiftDto } from './dto/update-shift.dto';
-import { RolesGuard } from '../users/auth';
-import { Roles } from '../users/auth';
-import { UserRole } from '../../common';
+} from "@nestjs/common";
+import { ShiftService } from "./shift.service";
+import { CreateShiftDto } from "./dto/create-shift.dto";
+import { UpdateShiftDto } from "./dto/update-shift.dto";
+import { RolesGuard } from "../users/auth";
+import { Roles } from "../users/auth";
+import { UserRole } from "../../common";
 
-@Controller('shifts')
+@Controller("shifts")
 @UseGuards(RolesGuard)
 export class ShiftController {
   constructor(private readonly shiftService: ShiftService) {}
@@ -34,21 +33,21 @@ export class ShiftController {
     return this.shiftService.findAll();
   }
 
-  @Get(':id')
+  @Get(":id")
   @Roles(UserRole.ADMIN, UserRole.MANAGER)
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param("id", ParseIntPipe) id: number) {
     return this.shiftService.findOne(id);
   }
 
-  @Patch(':id')
+  @Patch(":id")
   @Roles(UserRole.ADMIN, UserRole.MANAGER)
-  update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateShiftDto) {
+  update(@Param("id", ParseIntPipe) id: number, @Body() dto: UpdateShiftDto) {
     return this.shiftService.update(id, dto);
   }
 
-  @Delete(':id')
+  @Delete(":id")
   @Roles(UserRole.ADMIN)
-  remove(@Param('id', ParseIntPipe) id: number) {
+  remove(@Param("id", ParseIntPipe) id: number) {
     return this.shiftService.remove(id);
   }
 }

@@ -1,4 +1,4 @@
-import { UserEntity } from './user.entity';
+import { UserEntity } from "./user.entity";
 import {
   Column,
   CreateDateColumn,
@@ -6,32 +6,26 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('notifications')
+@Entity("notifications")
 export class NotificationEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'int' })
+  @Column({ type: "int" })
   user_id: number;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   message: string;
 
-  @Column({ type: 'boolean' })
+  @Column({ type: "boolean" })
   is_read: boolean;
 
   @CreateDateColumn()
   created_at: Date;
 
-  @ManyToOne(() => UserEntity, u => u.notifications)
-<<<<<<< HEAD
-  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  @ManyToOne(() => UserEntity, (u) => u.notifications)
+  @JoinColumn({ name: "user_id", referencedColumnName: "id" })
   user: UserEntity;
 }
-=======
-  @JoinColumn({ name: 'user_id' , referencedColumnName: 'id'})
-  user: UserEntity;
-}
->>>>>>> 117927f332bfee7c05bda7b49da2d7e516041abe

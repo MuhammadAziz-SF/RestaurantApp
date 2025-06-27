@@ -1,4 +1,4 @@
 import { Repository } from "typeorm";
-import { Location } from "./menu_ingredients.repository";
+import { location } from "../entity/location.entity";
 
-export type LocationRepository = Repository<Location>
+export type LocationRepository = Repository<location>;

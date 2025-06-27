@@ -3,15 +3,18 @@ import {
   Injectable,
   InternalServerErrorException,
   NotFoundException,
-} from '@nestjs/common';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Categories } from 'src/core/entity/categories.entity';
-import { Repository } from 'typeorm';
+} from "@nestjs/common";
+import { CreateCategoryDto } from "./dto/create-category.dto";
+import { UpdateCategoryDto } from "./dto/update-category.dto";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Categories } from "src/core/entity/categories.entity";
+import { Repository } from "typeorm";
 
 @Injectable()
 export class CategoriesService {
+  remove(id: string) {
+    throw new Error("Method not implemented.");
+  }
   constructor(
     @InjectRepository(Categories)
     private readonly categoryRepo: Repository<Categories>,
@@ -22,7 +25,7 @@ export class CategoriesService {
         where: { name: createCategoryDto.name },
       });
       if (existsName) {
-        throw new ConflictException('Name already exists');
+        throw new ConflictException("Name already exists");
       }
       const category = this.categoryRepo.create(createCategoryDto);
       await this.categoryRepo.save(category);
@@ -35,8 +38,8 @@ export class CategoriesService {
   async findAll() {
     try {
       const categories = await this.categoryRepo.find({
-        select: ['id', 'name'],
-        order: { created_at: 'DESC' },
+        select: ["id", "name"],
+        order: { created_at: "DESC" },
       });
       return categories;
     } catch (error) {

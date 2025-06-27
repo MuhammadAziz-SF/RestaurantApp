@@ -1,5 +1,5 @@
-import * as dotenv from 'dotenv';
-import { Logger } from '@nestjs/common';
+import * as dotenv from "dotenv";
+import { Logger } from "@nestjs/common";
 
 dotenv.config();
 
@@ -25,34 +25,34 @@ export type ConfigType = {
 };
 
 const requiredVariables = [
-  'PORT',
-  'DB_URL',
-  'ACCESS_TOKEN_KEY',
-  'ACCESS_TOKEN_TIME',
-  'REFRESH_TOKEN_KEY',
-  'REFRESH_TOKEN_TIME',
-  'PG_HOST',
-  'PG_PORT',
-  'PG_USER',
-  'PG_PASS',
-  'PG_DB',
-  'SMPT_HOST',
-  'SMPT_PORT',
-  'SMPT_USER',
-  'SMPT_PASS',
-  'ADMIN_NAME',
-  'ADMIN_EMAIL',
-  'ADMIN_PASSWORD',
+  "PORT",
+  "DB_URL",
+  "ACCESS_TOKEN_KEY",
+  "ACCESS_TOKEN_TIME",
+  "REFRESH_TOKEN_KEY",
+  "REFRESH_TOKEN_TIME",
+  "PG_HOST",
+  "PG_PORT",
+  "PG_USER",
+  "PG_PASS",
+  "PG_DB",
+  "SMPT_HOST",
+  "SMPT_PORT",
+  "SMPT_USER",
+  "SMPT_PASS",
+  "ADMIN_NAME",
+  "ADMIN_EMAIL",
+  "ADMIN_PASSWORD",
 ];
 
 const missingVariables = requiredVariables.filter((variable) => {
   const value = process.env[variable];
-  return !value || value.trim() === '';
+  return !value || value.trim() === "";
 });
 
 if (missingVariables.length > 0) {
   Logger.error(
-    `Missing or empty required environment variables: ${missingVariables.join(', ')}`,
+    `Missing or empty required environment variables: ${missingVariables.join(", ")}`,
   );
   process.exit(1);
 }

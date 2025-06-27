@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { CreateInventoryDto } from './dto/create-inventory.dto';
-import { UpdateInventoryDto } from './dto/update-inventory.dto';
+import { Injectable } from "@nestjs/common";
+import { CreateInventoryDto } from "./dto/create-inventory.dto";
+import { UpdateInventoryDto } from "./dto/update-inventory.dto";
 
 @Injectable()
 export class InventoryService {
   create(createInventoryDto: CreateInventoryDto) {
-    return 'This action adds a new inventory';
+    return "This action adds a new inventory";
   }
 
   findAll() {

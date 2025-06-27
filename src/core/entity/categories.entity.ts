@@ -5,15 +5,15 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
-import { menu_items } from './menu_items.entity';
+} from "typeorm";
+import { menu_items } from "./menu_items.entity";
 
-@Entity('categories')
+@Entity("categories")
 export class Categories {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', unique: true })
+  @Column({ type: "varchar", unique: true })
   name: string;
 
   @OneToMany(() => menu_items, (menuItem) => menuItem.category)

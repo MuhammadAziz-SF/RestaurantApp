@@ -1,3 +1,3 @@
-export * from './Page';
-export * from './Pager';
-export * from './RepositoryPager';
+export * from "./Page";
+export * from "./Pager";
+export * from "./RepositoryPager";

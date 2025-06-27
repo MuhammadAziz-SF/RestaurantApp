@@ -2,14 +2,14 @@ import {
   Injectable,
   InternalServerErrorException,
   NotFoundException,
-} from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { CreateOrderDto } from './dto/create-order.dto';
-import { UpdateOrderDto } from './dto/update-order.dto';
-import { orders } from 'src/core/entity/orders.entity';
-import { errorCatch } from 'src/infrastructure/lib/exeption/error-catch';
-import { successRes } from 'src/infrastructure/lib/exeption/success-response';
+} from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { CreateOrderDto } from "./dto/create-order.dto";
+import { UpdateOrderDto } from "./dto/update-order.dto";
+import { orders } from "src/core/entity/orders.entity";
+import { errorCatch } from "src/infrastructure/lib/exeption/error-catch";
+import { successRes } from "src/infrastructure/lib/exeption/success-response";
 
 @Injectable()
 export class OrdersService {
@@ -22,7 +22,7 @@ export class OrdersService {
     try {
       const order = this.orderRepository.create(createOrderDto);
       await this.orderRepository.save(order);
-      return successRes(order, 201);
+      return successRes("order", 201);
     } catch (error) {
       return errorCatch(error);
     }
@@ -30,8 +30,8 @@ export class OrdersService {
 
   async findAll() {
     try {
-      const orders = await this.orderRepository.find({ relations: ['items'] });
-      return successRes(orders);
+      const orders = await this.orderRepository.find({ relations: ["items"] });
+      return successRes(";");
     } catch (error) {
       return errorCatch(error);
     }
@@ -41,12 +41,12 @@ export class OrdersService {
     try {
       const order = await this.orderRepository.findOne({
         where: { id },
-        relations: ['items'],
+        relations: ["items"],
       });
       if (!order) {
         throw new NotFoundException(`ID si ${id} bo'lgan buyurtma topilmadi`);
       }
-      return successRes(order);
+      return successRes("order");
     } catch (error) {
       return errorCatch(error);
     }
@@ -63,7 +63,7 @@ export class OrdersService {
       const updatedOrder = await this.orderRepository.findOne({
         where: { id },
       });
-      return successRes(updatedOrder);
+      return successRes("updatedOrder");
     } catch (error) {
       return errorCatch(error);
     }
@@ -76,7 +76,7 @@ export class OrdersService {
         throw new NotFoundException(`ID si ${id} bo'lgan buyurtma topilmadi`);
       }
       await this.orderRepository.remove(order);
-      return successRes();
+      return successRes("1");
     } catch (error) {
       return errorCatch(error);
     }

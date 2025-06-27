@@ -1,4 +1,3 @@
-
 import {
   Controller,
   Get,
@@ -8,15 +7,15 @@ import {
   Patch,
   Delete,
   UseGuards,
-} from '@nestjs/common';
-import { UsersService } from './users.service';
-import { UserRole } from '../../common/enum/base.enum';
-import { RolesGuard } from './auth';
-import { Roles } from './auth';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+} from "@nestjs/common";
+import { UsersService } from "./users.service";
+import { UserRole } from "../../common/enum/base.enum";
+import { RolesGuard } from "./auth";
+import { Roles } from "./auth";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
 
-@Controller('users')
+@Controller("users")
 @UseGuards(RolesGuard)
 export class UsersController {
   constructor(private usersService: UsersService) {}
@@ -27,9 +26,9 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
+  @Get(":id")
   @Roles(UserRole.ADMIN, UserRole.MANAGER)
-  findOne(@Param('id') id: string) {
+  findOne(@Param("id") id: string) {
     return this.usersService.findOne(id);
   }
 
@@ -39,9 +38,9 @@ export class UsersController {
     return this.usersService.create(dto);
   }
 
-  @Patch(':id')
+  @Patch(":id")
   @Roles(UserRole.ADMIN)
-  update(@Param('id') id: string, @Body() dto: UpdateUserDto) {
+  update(@Param("id") id: string, @Body() dto: UpdateUserDto) {
     return this.usersService.update(id, dto);
   }
 
@@ -51,9 +50,9 @@ export class UsersController {
   //   return this.usersService.updateRole(id, role);
   // }
 
-  @Delete(':id')
+  @Delete(":id")
   @Roles(UserRole.ADMIN)
-  remove(@Param('id') id: string) {
+  remove(@Param("id") id: string) {
     return this.usersService.remove(id);
   }
 }
