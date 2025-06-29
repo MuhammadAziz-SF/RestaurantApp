@@ -5,6 +5,7 @@ import { Reservation } from "./reservation.entity";
 import { orders } from "./orders.entity";
 import { deliveries } from "./deliveries.entity";
 import { NotificationEntity } from "./notifications.entity";
+import { UserRole } from "../../common/enum/base.enum";
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -19,6 +20,9 @@ export class UserEntity {
 
   @Column({ type: "varchar" })
   password: string;
+
+  @Column({ type: "enum", enum: UserRole })
+  role: UserRole;
 
   @CreateDateColumn()
   createdAt: Date;

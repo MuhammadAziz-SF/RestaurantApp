@@ -5,15 +5,14 @@ import {ShiftEntity } from '../../core/entity/shifts.entity';
 import { ShiftService } from './shift.service';
 import { ShiftController } from './shifts.controller';
 import { UserEntity} from '../../core/entity/user.entity';
-import { UserModule } from '../users';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
   TypeOrmModule.forFeature([ShiftEntity, UserEntity]),
-    forwardRef(() => UserModule),
   ],
   controllers: [ShiftController],
-  providers: [ShiftService],
+  providers: [ShiftService, JwtService],
   exports: [ShiftService],
 })
 export class ShiftModule {}

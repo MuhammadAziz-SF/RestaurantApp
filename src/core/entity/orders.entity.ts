@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  UpdateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -20,9 +21,15 @@ export class orders {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => Reservation, (r) => r.orders)
-  @JoinColumn({ name: 'reservation_id' })
-  reservation: Reservation;
+  @Column({ type: 'uuid' })
+  user_id: string;
+
+  @ManyToOne(() => UserEntity, { nullable: false })
+  @JoinColumn({ name: 'user_id' })
+  user: UserEntity;
+
+  @Column({ type: 'uuid' })
+  reservation_id: string;
 
   @Column({
     type: 'enum',
@@ -33,6 +40,9 @@ export class orders {
 
   @CreateDateColumn()
   created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 
   @ManyToOne(() => UserEntity, (user) => user.managed_orders)
   @JoinColumn({ name: 'manager_id' })

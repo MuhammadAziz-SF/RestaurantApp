@@ -25,7 +25,7 @@ export class Reservation {
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: UserEntity;
 
-  @OneToMany(() => orders, (order) => order.reservation)
+  @OneToMany(() => orders, (order) => order.reservation_id)
   orders: orders[];
 
   @Column({ type: 'uuid' })
