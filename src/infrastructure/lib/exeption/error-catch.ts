@@ -1,4 +1,4 @@
-import { HttpException, InternalServerErrorException } from '@nestjs/common';
+import { HttpException, InternalServerErrorException } from "@nestjs/common";
 
 export const errorCatch = (err: any) => {
   if (err?.response) {

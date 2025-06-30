@@ -1,13 +1,21 @@
 import { reviews } from "./reviews.entity";
 import { ShiftEntity } from "./shifts.entity";
-import { Entity, OneToMany, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne } from "typeorm";
+import {
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToOne,
+} from "typeorm";
 import { Reservation } from "./reservation.entity";
 import { orders } from "./orders.entity";
 import { deliveries } from "./deliveries.entity";
 import { NotificationEntity } from "./notifications.entity";
 import { UserRole } from "../../common/enum/base.enum";
 
-@Entity({ name: 'users' })
+@Entity({ name: "users" })
 export class UserEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -30,21 +38,21 @@ export class UserEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToMany(() => Reservation, r => r.user)
+  @OneToMany(() => Reservation, (r) => r.user)
   reservations: Reservation[];
 
-  @OneToMany(() => orders, order => order.manager)
+  @OneToMany(() => orders, (order) => order.manager)
   managed_orders: orders[];
 
-  @OneToMany(() => deliveries, delivery => delivery.user_id)
+  @OneToMany(() => deliveries, (delivery) => delivery.user_id)
   deliveries: deliveries[];
 
   @OneToOne(() => ShiftEntity, (shift) => shift.user)
   shift: ShiftEntity;
 
-  @OneToMany(() => reviews, review => review.user)
+  @OneToMany(() => reviews, (review) => review.user)
   reviews: reviews[];
 
-  @OneToMany(() => NotificationEntity, notification => notification.user)
+  @OneToMany(() => NotificationEntity, (notification) => notification.user)
   notifications: NotificationEntity[];
 }

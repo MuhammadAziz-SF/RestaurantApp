@@ -6,25 +6,25 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
-import { menu_items } from './menu_items.entity';
-import { UserEntity } from './user.entity';
+} from "typeorm";
+import { menu_items } from "./menu_items.entity";
+import { UserEntity } from "./user.entity";
 
-@Entity('reviews')
+@Entity("reviews")
 export class reviews {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ type: 'uuid' })
+  @Column({ type: "uuid" })
   user_id: string;
 
-  @Column({ type: 'int' })
+  @Column({ type: "int" })
   menu_item_id: number;
 
-  @Column({ type: 'int' })
+  @Column({ type: "int" })
   rating: number;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   comment: string;
 
   @CreateDateColumn()
@@ -33,11 +33,11 @@ export class reviews {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => UserEntity, (u) => u.reviews, { onDelete: 'SET NULL' })
-  @JoinColumn({ name: 'user_id' })
+  @ManyToOne(() => UserEntity, (u) => u.reviews, { onDelete: "SET NULL" })
+  @JoinColumn({ name: "user_id" })
   user: UserEntity;
 
-  @ManyToOne(() => menu_items, (m) => m.reviews, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'menu_item_id' })
+  @ManyToOne(() => menu_items, (m) => m.reviews, { onDelete: "CASCADE" })
+  @JoinColumn({ name: "menu_item_id" })
   menu_item: menu_items;
 }

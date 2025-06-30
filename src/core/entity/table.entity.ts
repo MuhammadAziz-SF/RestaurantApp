@@ -5,18 +5,18 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-} from 'typeorm';
-import { Reservation } from './reservation.entity';
+} from "typeorm";
+import { Reservation } from "./reservation.entity";
 
 @Entity()
 export class Table {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'int', unique: true })
+  @Column({ type: "int", unique: true })
   table_number: number;
 
-  @Column({ type: 'int' })
+  @Column({ type: "int" })
   capacity: number;
 
   @OneToMany(() => Reservation, (reservation) => reservation.table)

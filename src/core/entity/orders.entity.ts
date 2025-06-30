@@ -8,31 +8,31 @@ import {
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
-} from 'typeorm';
-import { deliveries } from './deliveries.entity';
-import { OrderItem } from './order-item.entity';
-import { payments } from './payments.entity';
-import { UserEntity } from './user.entity';
-import { Reservation } from './reservation.entity';
-import { OrderStatus } from 'src/common';
+} from "typeorm";
+import { deliveries } from "./deliveries.entity";
+import { OrderItem } from "./order-item.entity";
+import { payments } from "./payments.entity";
+import { UserEntity } from "./user.entity";
+import { Reservation } from "./reservation.entity";
+import { OrderStatus } from "src/common";
 
-@Entity('orders')
+@Entity("orders")
 export class orders {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ type: 'uuid' })
+  @Column({ type: "uuid" })
   user_id: string;
 
   @ManyToOne(() => UserEntity, { nullable: false })
-  @JoinColumn({ name: 'user_id' })
+  @JoinColumn({ name: "user_id" })
   user: UserEntity;
 
-  @Column({ type: 'uuid' })
+  @Column({ type: "uuid" })
   reservation_id: string;
 
   @Column({
-    type: 'enum',
+    type: "enum",
     enum: OrderStatus,
     default: OrderStatus.PENDING,
   })
@@ -45,7 +45,7 @@ export class orders {
   updated_at: Date;
 
   @ManyToOne(() => UserEntity, (user) => user.managed_orders)
-  @JoinColumn({ name: 'manager_id' })
+  @JoinColumn({ name: "manager_id" })
   manager: UserEntity;
 
   @OneToMany(() => OrderItem, (item) => item.order)

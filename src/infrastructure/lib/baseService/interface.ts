@@ -1,4 +1,4 @@
-import { FindManyOptions } from 'typeorm';
+import { FindManyOptions } from "typeorm";
 
 export interface IResponse<T> {
   data: T;
@@ -16,6 +16,12 @@ export interface IResponsePagination<T> {
   to: number;
   status_code: number;
   message: string;
+}
+
+export interface JwtPayload {
+  id: string;
+  role: string;
+  fullName: string;
 }
 
 export interface IFindOptions<T> extends FindManyOptions<T> {}

@@ -2,10 +2,10 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
-} from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Table } from '../../core/entity/table.entity';
+} from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { Table } from "../../core/entity/table.entity";
 // import { CreateTableDto } from './dto/create-table.dto';
 // import { UpdateTableDto } from './dto/update-table.dto';
 
@@ -29,7 +29,7 @@ export class TablesService {
     try {
       return await this.tableRepository.find();
     } catch (error) {
-      throw new Error('Failed to fetch tables');
+      throw new Error("Failed to fetch tables");
     }
   }
 
@@ -66,7 +66,7 @@ export class TablesService {
         throw error;
       }
       throw new BadRequestException(
-        'Failed to delete table. This table use in Reservations.',
+        "Failed to delete table. This table use in Reservations.",
       );
     }
   }

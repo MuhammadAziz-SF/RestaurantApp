@@ -1,5 +1,4 @@
-
-import { IsUUID, IsDateString } from 'class-validator';
+import { IsUUID, IsDateString } from "class-validator";
 
 export class CreateShiftDto {
   @IsUUID()

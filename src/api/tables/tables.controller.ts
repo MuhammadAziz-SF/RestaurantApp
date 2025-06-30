@@ -6,8 +6,8 @@ import {
   Patch,
   Param,
   Delete,
-} from '@nestjs/common';
-import { TablesService } from '../tables/tables.service';
+} from "@nestjs/common";
+import { TablesService } from "../tables/tables.service";
 // import { CreateTableDto } from './dto/create-table.dto';
 // import { UpdateTableDto } from './dto/update-table.dto';
 import {
@@ -17,11 +17,11 @@ import {
   ApiBadRequestResponse,
   ApiNotFoundResponse,
   ApiParam,
-} from '@nestjs/swagger';
-import { Table } from '../../core/entity/table.entity';
+} from "@nestjs/swagger";
+import { Table } from "../../core/entity/table.entity";
 
-@ApiTags('Tables')
-@Controller('tables')
+@ApiTags("Tables")
+@Controller("tables")
 export class TablesController {
   constructor(private readonly tablesService: TablesService) {}
 
@@ -34,18 +34,18 @@ export class TablesController {
   // }
 
   @Get()
-  @ApiOperation({ summary: 'Get all tables' })
-  @ApiResponse({ status: 200, description: 'All tables', type: [Table] })
+  @ApiOperation({ summary: "Get all tables" })
+  @ApiResponse({ status: 200, description: "All tables", type: [Table] })
   findAll() {
     return this.tablesService.findAll();
   }
 
-  @Get(':id')
-  @ApiOperation({ summary: 'Get one table by ID' })
-  @ApiParam({ name: 'id', type: 'string', description: 'ID table' })
-  @ApiResponse({ status: 200, description: 'Founded', type: Table })
-  @ApiNotFoundResponse({ description: 'table not found' })
-  findOne(@Param('id') id: string) {
+  @Get(":id")
+  @ApiOperation({ summary: "Get one table by ID" })
+  @ApiParam({ name: "id", type: "string", description: "ID table" })
+  @ApiResponse({ status: 200, description: "Founded", type: Table })
+  @ApiNotFoundResponse({ description: "table not found" })
+  findOne(@Param("id") id: string) {
     return this.tablesService.findOne(+id);
   }
 
@@ -58,12 +58,12 @@ export class TablesController {
   //   return this.tablesService.update(+id, updateTableDto);
   // }
 
-  @Delete(':id')
-  @ApiOperation({ summary: 'Delete table' })
-  @ApiParam({ name: 'id', type: 'string', description: 'ID table' })
-  @ApiResponse({ status: 200, description: 'Success delete' })
-  @ApiNotFoundResponse({ description: 'table not found' })
-  remove(@Param('id') id: string) {
+  @Delete(":id")
+  @ApiOperation({ summary: "Delete table" })
+  @ApiParam({ name: "id", type: "string", description: "ID table" })
+  @ApiResponse({ status: 200, description: "Success delete" })
+  @ApiNotFoundResponse({ description: "table not found" })
+  remove(@Param("id") id: string) {
     return this.tablesService.remove(+id);
   }
 }

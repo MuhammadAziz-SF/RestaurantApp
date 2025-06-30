@@ -1,5 +1,5 @@
-import { IsUUID, IsNotEmpty, IsEnum, IsOptional } from 'class-validator';
-import { OrderStatus } from '../../../common/enum/base.enum';
+import { IsUUID, IsNotEmpty, IsEnum, IsOptional } from "class-validator";
+import { OrderStatus } from "../../../common/enum/base.enum";
 
 export class CreateOrderDto {
   @IsUUID()

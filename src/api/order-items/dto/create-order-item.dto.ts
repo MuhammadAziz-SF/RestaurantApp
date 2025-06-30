@@ -1,4 +1,4 @@
-import { IsUUID, IsNotEmpty, IsInt, IsDecimal } from 'class-validator';
+import { IsUUID, IsNotEmpty, IsInt, IsDecimal } from "class-validator";
 
 export class CreateOrderItemDto {
   @IsUUID()
@@ -13,7 +13,7 @@ export class CreateOrderItemDto {
   @IsNotEmpty()
   quantity: number;
 
-  @IsDecimal({ decimal_digits: '2' })
+  @IsDecimal({ decimal_digits: "2" })
   @IsNotEmpty()
   price: number;
 }

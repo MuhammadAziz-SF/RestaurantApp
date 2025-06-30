@@ -1,11 +1,10 @@
-
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { ShiftEntity } from '../../core/entity/shifts.entity';
-import { CreateShiftDto } from './dto/create-shift.dto';
-import { UpdateShiftDto } from './dto/update-shift.dto';
-import { UserEntity } from '../../core/entity/user.entity';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { ShiftEntity } from "../../core/entity/shifts.entity";
+import { CreateShiftDto } from "./dto/create-shift.dto";
+import { UpdateShiftDto } from "./dto/update-shift.dto";
+import { UserEntity } from "../../core/entity/user.entity";
 
 @Injectable()
 export class ShiftService {
@@ -18,7 +17,7 @@ export class ShiftService {
 
   async create(dto: CreateShiftDto): Promise<ShiftEntity> {
     const user = await this.userRepo.findOne({ where: { id: dto.userId } });
-    if (!user) throw new NotFoundException('User not found');
+    if (!user) throw new NotFoundException("User not found");
 
     const shift = this.shiftRepo.create({
       user,
@@ -30,16 +29,18 @@ export class ShiftService {
   }
 
   findAll(): Promise<ShiftEntity[]> {
-    return this.shiftRepo.find({ relations: ['user'] });
+    return this.shiftRepo.find({ relations: ["user"] });
   }
 
   async findOne(id: number): Promise<ShiftEntity> {
-    const shift = await this.shiftRepo.find({
-      where: { id: id.toString() },
-      relations: ['user'],
-    }).then(arr => arr[0]);
+    const shift = await this.shiftRepo
+      .find({
+        where: { id: id.toString() },
+        relations: ["user"],
+      })
+      .then((arr) => arr[0]);
 
-    if (!shift) throw new NotFoundException('Shift not found');
+    if (!shift) throw new NotFoundException("Shift not found");
     return shift;
   }
 

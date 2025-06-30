@@ -2,14 +2,14 @@ import {
   Injectable,
   NotFoundException,
   BadRequestException,
-} from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Reservation } from '../../core/entity/reservation.entity';
-import { CreateReservationDto } from './dto/create-reservation.dto';
-import { UpdateReservationDto } from './dto/update-reservation.dto';
-import { TablesService } from '../tables/tables.service';
-import { ReservationStatus } from '../../common/enum/base.enum';
+} from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { Reservation } from "../../core/entity/reservation.entity";
+import { CreateReservationDto } from "./dto/create-reservation.dto";
+import { UpdateReservationDto } from "./dto/update-reservation.dto";
+import { TablesService } from "../tables/tables.service";
+import { ReservationStatus } from "../../common/enum/base.enum";
 
 @Injectable()
 export class ReservationsService {
@@ -40,16 +40,16 @@ export class ReservationsService {
   async findAll(): Promise<Reservation[]> {
     try {
       return await this.reservationRepository.find({
-        relations: ['table', 'user'],
-        order: { created_at: 'DESC' },
+        relations: ["table", "user"],
+        order: { created_at: "DESC" },
       });
     } catch (error) {
-      throw new BadRequestException('Failed to fetch reservations');
+      throw new BadRequestException("Failed to fetch reservations");
     }
   }
 
   async findOne(id: string): Promise<Reservation> {
-    if (!id) throw new BadRequestException('Reservation ID is required');
+    if (!id) throw new BadRequestException("Reservation ID is required");
 
     try {
       const reservation = await this.reservationRepository.findOne({
@@ -63,12 +63,12 @@ export class ReservationsService {
       return reservation;
     } catch (error) {
       if (error instanceof NotFoundException) throw error;
-      throw new BadRequestException('Failed to fetch reservation');
+      throw new BadRequestException("Failed to fetch reservation");
     }
   }
 
   async update(id: string, dto: UpdateReservationDto): Promise<Reservation> {
-    if (!id) throw new BadRequestException('Reservation ID is required');
+    if (!id) throw new BadRequestException("Reservation ID is required");
 
     try {
       const reservation = await this.findOne(id);
@@ -91,7 +91,7 @@ export class ReservationsService {
         !Object.values(ReservationStatus).includes(dto.status)
       ) {
         throw new BadRequestException(
-          'Invalid status. Use a correct enum value.',
+          "Invalid status. Use a correct enum value.",
         );
       }
 
@@ -108,13 +108,13 @@ export class ReservationsService {
         throw error;
       }
       throw new BadRequestException(
-        'Failed to update reservation. correct COLUMN',
+        "Failed to update reservation. correct COLUMN",
       );
     }
   }
 
   async remove(id: string): Promise<void> {
-    if (!id) throw new BadRequestException('Reservation ID is required');
+    if (!id) throw new BadRequestException("Reservation ID is required");
 
     try {
       const reservation = await this.findOne(id);
@@ -126,7 +126,7 @@ export class ReservationsService {
       ) {
         throw error;
       }
-      throw new BadRequestException('Failed to delete reservation');
+      throw new BadRequestException("Failed to delete reservation");
     }
   }
 }

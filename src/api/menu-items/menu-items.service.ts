@@ -2,12 +2,12 @@ import {
   Injectable,
   InternalServerErrorException,
   NotFoundException,
-} from '@nestjs/common';
-import { CreateMenuItemDto } from './dto/create-menu-item.dto';
+} from "@nestjs/common";
+import { CreateMenuItemDto } from "./dto/create-menu-item.dto";
 // import { UpdateMenuItemDto } from './dto/update-menu-item.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { menu_items } from 'src/core/entity/menu_items.entity';
-import { Repository } from 'typeorm';
+import { InjectRepository } from "@nestjs/typeorm";
+import { menu_items } from "src/core/entity/menu_items.entity";
+import { Repository } from "typeorm";
 
 @Injectable()
 export class MenuItemsService {
@@ -28,8 +28,8 @@ export class MenuItemsService {
   async findAll() {
     try {
       const menu_items = await this.menuRepo.find({
-        select: ['id', 'name', 'description', 'price', 'is_available'],
-        order: { created_at: 'DESC' },
+        select: ["id", "name", "description", "price", "is_available"],
+        order: { created_at: "DESC" },
       });
       return menu_items;
     } catch (error) {
@@ -41,10 +41,10 @@ export class MenuItemsService {
     try {
       const menu_items = await this.menuRepo.findOne({
         where: { id },
-        select: ['id', 'name', 'description', 'price', 'created_at'],
+        select: ["id", "name", "description", "price", "created_at"],
       });
       if (!menu_items) {
-        throw new NotFoundException('Not Found');
+        throw new NotFoundException("Not Found");
       }
       return menu_items;
     } catch (error) {
@@ -73,10 +73,10 @@ export class MenuItemsService {
     try {
       const menu_items = await this.menuRepo.findOne({ where: { id } });
       if (!menu_items) {
-        throw new NotFoundException('Not Found');
+        throw new NotFoundException("Not Found");
       }
       await this.menuRepo.delete({ id });
-      return { message: 'success' };
+      return { message: "success" };
     } catch (error) {
       throw new InternalServerErrorException(error);
     }

@@ -2,14 +2,14 @@ import {
   Injectable,
   InternalServerErrorException,
   NotFoundException,
-} from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { CreateOrderItemDto } from './dto/create-order-item.dto';
-import { UpdateOrderItemDto } from './dto/update-order-item.dto';
-import { OrderItem } from 'src/core/entity/order-item.entity';
-import { errorCatch } from 'src/infrastructure/lib/exeption/error-catch';
-import { successRes } from 'src/infrastructure/lib/exeption/success-response';
+} from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { CreateOrderItemDto } from "./dto/create-order-item.dto";
+import { UpdateOrderItemDto } from "./dto/update-order-item.dto";
+import { OrderItem } from "src/core/entity/order-item.entity";
+import { errorCatch } from "src/infrastructure/lib/exeption/error-catch";
+import { successRes } from "src/infrastructure/lib/exeption/success-response";
 
 @Injectable()
 export class OrderItemsService {
@@ -31,7 +31,7 @@ export class OrderItemsService {
   async findAll() {
     try {
       const orderItems = await this.orderItemRepository.find({
-        relations: ['order'],
+        relations: ["order"],
       });
       return successRes(orderItems);
     } catch (error) {
@@ -43,7 +43,7 @@ export class OrderItemsService {
     try {
       const orderItem = await this.orderItemRepository.findOne({
         where: { id },
-        relations: ['order'],
+        relations: ["order"],
       });
       if (!orderItem) {
         throw new NotFoundException(

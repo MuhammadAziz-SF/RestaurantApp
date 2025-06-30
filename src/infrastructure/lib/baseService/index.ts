@@ -1,7 +1,7 @@
-import { HttpException } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { IFindOptions } from './interface';
-import { RepositoryPager } from '../pagination';
+import { HttpException } from "@nestjs/common";
+import { Repository } from "typeorm";
+import { IFindOptions } from "./interface";
+import { RepositoryPager } from "../pagination";
 
 export class BaseService<CreateDto, Entity> {
   constructor(private readonly repository: Repository<any>) {}
@@ -17,7 +17,7 @@ export class BaseService<CreateDto, Entity> {
     created_data = await this.repository.save(created_data);
     return {
       status_code: 201,
-      message: 'sucess',
+      message: "sucess",
       data: created_data,
     };
   }
@@ -28,7 +28,7 @@ export class BaseService<CreateDto, Entity> {
     })) as Entity[];
     return {
       status_code: 200,
-      message: 'success',
+      message: "success",
       data: data,
     };
   }
@@ -36,7 +36,7 @@ export class BaseService<CreateDto, Entity> {
   async findAllWithPagination(options?: IFindOptions<Entity>) {
     return await RepositoryPager.findAll(
       this.getRepository,
-      'success',
+      "success",
       options,
     );
   }
@@ -48,11 +48,11 @@ export class BaseService<CreateDto, Entity> {
       where: options.where,
     })) as Entity;
     if (!data) {
-      throw new HttpException('not found', 404);
+      throw new HttpException("not found", 404);
     }
     return {
       status_code: 200,
-      message: 'success',
+      message: "success",
       data: data,
     };
   }
@@ -64,11 +64,11 @@ export class BaseService<CreateDto, Entity> {
       where: { id, ...options?.where },
     })) as unknown as Entity;
     if (!data) {
-      throw new HttpException('not found', 404);
+      throw new HttpException("not found", 404);
     }
     return {
       status_code: 200,
-      message: 'success',
+      message: "success",
       data,
     };
   }
@@ -81,7 +81,7 @@ export class BaseService<CreateDto, Entity> {
     });
     return {
       status_code: 200,
-      message: 'success',
+      message: "success",
       data: {},
     };
   }
@@ -91,7 +91,7 @@ export class BaseService<CreateDto, Entity> {
     (await this.repository.delete(id)) as unknown as Entity;
     return {
       status_code: 200,
-      message: 'success',
+      message: "success",
       data: {},
     };
   }

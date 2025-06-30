@@ -7,33 +7,33 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
-import { Categories } from './categories.entity';
-import { menuIngredient } from './menu_ingredients.entity';
-import { OrderItem } from './order-item.entity';
-import { reviews } from './reviews.entity';
+} from "typeorm";
+import { Categories } from "./categories.entity";
+import { menuIngredient } from "./menu_ingredients.entity";
+import { OrderItem } from "./order-item.entity";
+import { reviews } from "./reviews.entity";
 
-@Entity('menu_items')
+@Entity("menu_items")
 export class menu_items {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', unique: true })
+  @Column({ type: "varchar", unique: true })
   name: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   description: string;
 
-  @Column({ type: 'int' })
+  @Column({ type: "int" })
   price: number;
 
   @Column({ default: true })
   is_available: boolean;
 
   @ManyToOne(() => Categories, (category) => category.menuItems, {
-    onDelete: 'SET NULL',
+    onDelete: "SET NULL",
   })
-  @JoinColumn({ name: 'category_id' })
+  @JoinColumn({ name: "category_id" })
   category: Categories;
 
   @OneToMany(() => menuIngredient, (menuIngredient) => menuIngredient.menu_item)

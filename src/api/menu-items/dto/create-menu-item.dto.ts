@@ -5,7 +5,7 @@ import {
   IsOptional,
   Min,
   IsInt,
-} from 'class-validator';
+} from "class-validator";
 
 export class CreateMenuItemDto {
   @IsString()

@@ -6,10 +6,10 @@ import {
   Patch,
   Param,
   Delete,
-} from '@nestjs/common';
-import { ReservationsService } from './reservation.service';
-import { CreateReservationDto } from './dto/create-reservation.dto';
-import { UpdateReservationDto } from './dto/update-reservation.dto';
+} from "@nestjs/common";
+import { ReservationsService } from "./reservation.service";
+import { CreateReservationDto } from "./dto/create-reservation.dto";
+import { UpdateReservationDto } from "./dto/update-reservation.dto";
 import {
   ApiTags,
   ApiOperation,
@@ -17,68 +17,68 @@ import {
   ApiBadRequestResponse,
   ApiNotFoundResponse,
   ApiParam,
-} from '@nestjs/swagger';
-import { Reservation } from '../../core/entity/reservation.entity';
+} from "@nestjs/swagger";
+import { Reservation } from "../../core/entity/reservation.entity";
 
-@ApiTags('Reservations')
-@Controller('reservations')
+@ApiTags("Reservations")
+@Controller("reservations")
 export class ReservationsController {
   constructor(private readonly reservationsService: ReservationsService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create reservation' })
+  @ApiOperation({ summary: "Create reservation" })
   @ApiResponse({
     status: 201,
-    description: 'Success create',
+    description: "Success create",
     type: Reservation,
-  })  
-  @ApiBadRequestResponse({ description: 'Invalid values' })
+  })
+  @ApiBadRequestResponse({ description: "Invalid values" })
   async create(@Body() createReservationDto: CreateReservationDto) {
     return this.reservationsService.create(createReservationDto);
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all reservations' })
+  @ApiOperation({ summary: "Get all reservations" })
   @ApiResponse({
     status: 200,
-    description: 'All reservations',
+    description: "All reservations",
     type: [Reservation],
   })
   async findAll() {
     return this.reservationsService.findAll();
   }
 
-  @Get(':id')
-  @ApiOperation({ summary: 'Get one reservation by ID' })
-  @ApiParam({ name: 'id', type: 'string', description: 'ID reservation' })
-  @ApiResponse({ status: 200, description: 'Founded', type: Reservation })
-  @ApiNotFoundResponse({ description: 'reservation not found' })
-  async findOne(@Param('id') id: string) {
+  @Get(":id")
+  @ApiOperation({ summary: "Get one reservation by ID" })
+  @ApiParam({ name: "id", type: "string", description: "ID reservation" })
+  @ApiResponse({ status: 200, description: "Founded", type: Reservation })
+  @ApiNotFoundResponse({ description: "reservation not found" })
+  async findOne(@Param("id") id: string) {
     return this.reservationsService.findOne(id);
   }
 
-  @Patch(':id')
-  @ApiOperation({ summary: 'Update reservation' })
-  @ApiParam({ name: 'id', type: 'string', description: 'ID reservation' })
+  @Patch(":id")
+  @ApiOperation({ summary: "Update reservation" })
+  @ApiParam({ name: "id", type: "string", description: "ID reservation" })
   @ApiResponse({
     status: 200,
-    description: 'Success update',
+    description: "Success update",
     type: Reservation,
   })
-  @ApiBadRequestResponse({ description: 'Error in update' })
+  @ApiBadRequestResponse({ description: "Error in update" })
   async update(
-    @Param('id') id: string,
+    @Param("id") id: string,
     @Body() updateReservationDto: UpdateReservationDto,
   ) {
     return this.reservationsService.update(id, updateReservationDto);
   }
 
-  @Delete(':id')
-  @ApiOperation({ summary: 'Delete reservation' })
-  @ApiParam({ name: 'id', type: 'string', description: 'ID reservation' })
-  @ApiResponse({ status: 200, description: 'Success delete' })
-  @ApiNotFoundResponse({ description: 'reservation not found' })
-  async remove(@Param('id') id: string) {
+  @Delete(":id")
+  @ApiOperation({ summary: "Delete reservation" })
+  @ApiParam({ name: "id", type: "string", description: "ID reservation" })
+  @ApiResponse({ status: 200, description: "Success delete" })
+  @ApiNotFoundResponse({ description: "reservation not found" })
+  async remove(@Param("id") id: string) {
     return this.reservationsService.remove(id);
   }
 }

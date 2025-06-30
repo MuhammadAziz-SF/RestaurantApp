@@ -5,24 +5,24 @@ import {
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
-} from 'typeorm';
-import { UserEntity } from './user.entity';
+} from "typeorm";
+import { UserEntity } from "./user.entity";
 
-@Entity('shifts')
+@Entity("shifts")
 export class ShiftEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: "varchar" })
   user_id: string;
 
-  @Column({ type: 'date' })
+  @Column({ type: "date" })
   start_time: Date;
 
-  @Column({ type: 'date' })
+  @Column({ type: "date" })
   end_time: Date;
 
   @OneToOne(() => UserEntity, (user) => user.shift)
-  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: "user_id", referencedColumnName: "id" })
   user: UserEntity;
 }
